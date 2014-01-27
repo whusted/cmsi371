@@ -6,7 +6,7 @@ $(function () {
 
     sprites.willy.x = 100;
 
-    sprites.geoff.x = 200;
+    sprites.geoff.x = 250;
 
     sprites.drawWilly();
     sprites.drawGeoff();
