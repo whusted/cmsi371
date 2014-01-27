@@ -45,6 +45,8 @@ $(function () {
         sprites.renderingContext.strokeStyle = "black";
         sprites.renderingContext.beginPath();
         sprites.renderingContext.strokeRect(sprites.geoff.x - 237, sprites.geoff.y - 25, 75, 75);
+        sprites.renderingContext.fillRect(sprites.geoff.x - 237, sprites.geoff.y - 25, 75, 75);
+
         sprites.renderingContext.restore();
 
     };
