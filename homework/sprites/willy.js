@@ -21,6 +21,12 @@ $(function () {
         sprites.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
+
+        // Willy's smile
+        sprites.renderingContext.beginPath();
+        sprites.renderingContext.scale(1.0, 1.0);
+        sprites.renderingContext.arc(0, 10, 7, 0, Math.PI);
+        sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
     };
 
