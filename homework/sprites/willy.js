@@ -40,8 +40,8 @@ $(function () {
 
     // Willy's white shirt
     window['sprites'].shirt = {
-        x: 50,
-        y: 50
+        x: sprites.willy.x,
+        y: sprites.willy.y
     };
 
     window['sprites'].drawWillyShirt = function () {
@@ -50,8 +50,8 @@ $(function () {
         sprites.renderingContext.fillStyle = "rgb(" + 250 + "," + 250 + "," + 250 + ")";
         sprites.renderingContext.strokeStyle = "black";
         sprites.renderingContext.beginPath();
-        sprites.renderingContext.strokeRect(sprites.willy.x - 137, sprites.willy.y - 25, 75, 75);
-        sprites.renderingContext.fillRect(sprites.willy.x - 137, sprites.willy.y - 25, 75, 75);
+        sprites.renderingContext.strokeRect(-37, 25, 75, 75);
+        sprites.renderingContext.fillRect(-37, 25, 75, 75);
 
         sprites.renderingContext.restore();
 
