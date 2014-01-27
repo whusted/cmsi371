@@ -27,6 +27,14 @@ $(function () {
         sprites.renderingContext.scale(1.0, 1.0);
         sprites.renderingContext.arc(0, 10, 7, 0, Math.PI);
         sprites.renderingContext.stroke();
+
+        // Willy's eyes
+        sprites.renderingContext.beginPath();
+        sprites.renderingContext.scale(1.0, 1.0);
+        sprites.renderingContext.arc(8, -3, 2, 0, Math.PI * 2);
+        sprites.renderingContext.moveTo(-5, -3);
+        sprites.renderingContext.arc(-8, -3, 2, 0, Math.PI * 2);
+        sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
     };
 
