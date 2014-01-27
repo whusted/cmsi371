@@ -10,4 +10,5 @@ $(function () {
 
     sprites.drawWilly();
     sprites.drawGeoff();
+    sprites.drawShirt();
 });

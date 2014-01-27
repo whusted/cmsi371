@@ -5,7 +5,8 @@ $(function () {
         y: 50,
         bobLevel: 0
     };
-
+    
+    // Willy's face
     window['sprites'].drawWilly = function () {
         var fleshR = 255 - Math.floor(sprites.willy.bobLevel * 50),
             fleshG = 249 - Math.floor(sprites.willy.bobLevel * 50),
@@ -22,4 +23,23 @@ $(function () {
         sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
     };
+
+    // Willy's white shirt
+    window['sprites'].shirt = {
+        x: 50,
+        y: 50
+    };
+
+    window['sprites'].drawShirt = function () {
+        sprites.renderingContext.save();
+        sprites.renderingContext.translate(sprites.willy.x, sprites.willy.y);
+        sprites.renderingContext.fillStyle = "rgb(" + 250 + "," + 250 + "," + 250 + ")";
+        sprites.renderingContext.strokeStyle = "black";
+        sprites.renderingContext.beginPath();
+        sprites.renderingContext.strokeRect(sprites.willy.x - 137,sprites.willy.y - 25,75,75);
+        sprites.renderingContext.restore();
+
+    };
+
+    
 });
