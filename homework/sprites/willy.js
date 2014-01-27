@@ -30,7 +30,7 @@ $(function () {
         y: 50
     };
 
-    window['sprites'].drawShirt = function () {
+    window['sprites'].drawWillyShirt = function () {
         sprites.renderingContext.save();
         sprites.renderingContext.translate(sprites.willy.x, sprites.willy.y);
         sprites.renderingContext.fillStyle = "rgb(" + 250 + "," + 250 + "," + 250 + ")";
