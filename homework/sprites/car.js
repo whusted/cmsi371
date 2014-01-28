@@ -24,6 +24,13 @@ $(function () {
         sprites.renderingContext.strokeRect(sprites.car.x, sprites.car.y, 70, 60);
         sprites.renderingContext.fillRect(sprites.car.x, sprites.car.y, 70, 60);
 
+        //Steering wheel
+        sprites.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        sprites.renderingContext.strokeStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        sprites.renderingContext.moveTo(sprites.car.x + 55, sprites.car.y + 50);
+        sprites.renderingContext.bezierCurveTo(sprites.car.x + 75, sprites.car.y + 85, sprites.car.x + 25, sprites.car.y + 60, sprites.car.x + 55, sprites.car.y + 50);
+        sprites.renderingContext.stroke();
+
         //Wheels
         sprites.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
         sprites.renderingContext.beginPath();
