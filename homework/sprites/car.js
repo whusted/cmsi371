@@ -33,6 +33,16 @@ $(function () {
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
+        
+        //Hubcaps
+        sprites.renderingContext.fillStyle = "rgb(" + 210 + "," + 210 + "," + 210 + ")";
+        sprites.renderingContext.beginPath();
+        sprites.renderingContext.arc(sprites.car.x + 50, sprites.car.y + 110, 15, 0, Math.PI * 2);
+        sprites.renderingContext.moveTo(sprites.car.x + 180, sprites.car.y + 110);
+        sprites.renderingContext.arc(sprites.car.x + 150, sprites.car.y + 110, 15, 0, Math.PI * 2);
+        sprites.renderingContext.fill();
+        sprites.renderingContext.stroke();
+        sprites.renderingContext.restore();
 
     };
 
