@@ -20,7 +20,9 @@ $(function () {
         sprites.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
+        
 
+        //Geoff's glasses
         sprites.renderingContext.beginPath();
         sprites.renderingContext.arc(-10, -5, 7, 0, Math.PI * 2);
         sprites.renderingContext.moveTo(-3, -5);
