@@ -7,7 +7,6 @@ $(function () {
     };
 
     window['sprites'].drawGeoff = function () {
-
         sprites.drawGeoffsHead();
         sprites.drawGeoffsGlasses();
         sprites.drawGeoffsSmile();

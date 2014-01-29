@@ -1,5 +1,6 @@
 $(function () {
     window['sprites'] = window['sprites'] || {};
+    
     window['sprites'].willy = {
         x: 50,
         y: 50,
@@ -10,7 +11,6 @@ $(function () {
         sprites.drawWillysHead();
         sprites.drawWillysSmile();
         sprites.drawWillysEyes();
-        
     };
 
     window['sprites'].drawWillysHead = function() {
@@ -28,8 +28,6 @@ $(function () {
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
-
-
     };
 
     window['sprites'].drawWillysSmile = function() {
@@ -67,9 +65,7 @@ $(function () {
         sprites.renderingContext.beginPath();
         sprites.renderingContext.strokeRect(-37, 25, 75, 75);
         sprites.renderingContext.fillRect(-37, 25, 75, 75);
-
         sprites.renderingContext.restore();
-
     };
 
     

@@ -70,6 +70,5 @@ $(function () {
         sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
     };
-
     
 });
