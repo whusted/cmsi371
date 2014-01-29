@@ -8,7 +8,7 @@ $(function () {
 
     sprites.geoff.x = 250;
 
-    sprites.car.x = 300;
+    sprites.car.x = 250;
 
     sprites.drawWilly();
     sprites.drawGeoff();
