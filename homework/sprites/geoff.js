@@ -7,6 +7,13 @@ $(function () {
     };
 
     window['sprites'].drawGeoff = function () {
+
+        sprites.drawGeoffsHead();
+        sprites.drawGeoffsGlasses();
+        sprites.drawGeoffsSmile();
+    };
+
+    window['sprites'].drawGeoffsHead = function() {
         var fleshR = 255,
             fleshG = 249,
             fleshB = 229;
@@ -20,9 +27,12 @@ $(function () {
         sprites.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
-        
+        sprites.renderingContext.restore();
+    };
 
-        //Geoff's glasses
+    window['sprites'].drawGeoffsGlasses = function() {
+        sprites.renderingContext.save();
+        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
         sprites.renderingContext.beginPath();
         sprites.renderingContext.arc(-10, -5, 7, 0, Math.PI * 2);
         sprites.renderingContext.moveTo(-3, -5);
@@ -30,13 +40,16 @@ $(function () {
         sprites.renderingContext.moveTo(17, -5);
         sprites.renderingContext.arc(10, -5, 7, 0, Math.PI * 2);
         sprites.renderingContext.stroke();
+        sprites.renderingContext.restore();
+    };
 
-        // Geoff's smile
+    window['sprites'].drawGeoffsSmile = function() {
+        sprites.renderingContext.save();
         sprites.renderingContext.beginPath();
+        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
         sprites.renderingContext.scale(1.0, 1.0);
         sprites.renderingContext.arc(0, 10, 7, 0, Math.PI);
         sprites.renderingContext.stroke();
-
         sprites.renderingContext.restore();
     };
 
