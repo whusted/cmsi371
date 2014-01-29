@@ -6,13 +6,11 @@ $(function () {
 
     sprites.willy.x = 100;
 
-    sprites.geoff.x = 250;
+    sprites.geoff.x = 200;
 
-    sprites.car.x = 250;
+    sprites.car.x = 300;
 
     sprites.drawWilly();
     sprites.drawGeoff();
-    sprites.drawWillyShirt();
-    sprites.drawGeoffShirt();
     sprites.drawCar();
 });

@@ -6,8 +6,14 @@ $(function () {
         bobLevel: 0
     };
     
-    // Willy's face
     window['sprites'].drawWilly = function () {
+        sprites.drawWillysHead();
+        sprites.drawWillysSmile();
+        sprites.drawWillysEyes();
+        
+    };
+
+    window['sprites'].drawWillysHead = function() {
         var fleshR = 255 - Math.floor(sprites.willy.bobLevel * 50),
             fleshG = 249 - Math.floor(sprites.willy.bobLevel * 50),
             fleshB = 229 - Math.floor(sprites.willy.bobLevel * 50);
@@ -21,21 +27,30 @@ $(function () {
         sprites.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
         sprites.renderingContext.fill();
         sprites.renderingContext.stroke();
+        sprites.renderingContext.restore();
 
-        // Willy's smile
+
+    };
+
+    window['sprites'].drawWillysSmile = function() {
+        sprites.renderingContext.save();
+        sprites.renderingContext.translate(sprites.willy.x, sprites.willy.y);
         sprites.renderingContext.beginPath();
-        sprites.renderingContext.scale(1.0, 1.0);
         sprites.renderingContext.arc(0, 10, 7, 0, Math.PI);
         sprites.renderingContext.stroke();
+        sprites.renderingContext.restore();
+    };
 
-        // Willy's eyes
+    window['sprites'].drawWillysEyes = function() {
+        sprites.renderingContext.save();
+        sprites.renderingContext.translate(sprites.willy.x, sprites.willy.y);
         sprites.renderingContext.beginPath();
-        sprites.renderingContext.scale(1.0, 1.0);
-        sprites.renderingContext.arc(8, -3, 2, 0, Math.PI * 2);
+        sprites.renderingContext.arc(8, -3, 2.5, 0, Math.PI * 2);
         sprites.renderingContext.moveTo(-5, -3);
-        sprites.renderingContext.arc(-8, -3, 2, 0, Math.PI * 2);
+        sprites.renderingContext.arc(-8, -3, 2.5, 0, Math.PI * 2);
         sprites.renderingContext.stroke();
         sprites.renderingContext.restore();
+
     };
 
     // Willy's white shirt
