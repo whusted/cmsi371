@@ -14,8 +14,8 @@ $(function () {
 
     window['sprites'].drawGeoffsHead = function() {
         var fleshR = 255,
-            fleshG = 249,
-            fleshB = 229;
+            fleshG = 204,
+            fleshB = 150;
 
         sprites.renderingContext.save();
         sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
