@@ -13,6 +13,7 @@ $(function () {
     };
 
     window['sprites'].drawGeoffsHead = function() {
+        // JD: Ooooh, parameterize this and you can totally make Geoff blush :)
         var fleshR = 255,
             fleshG = 204,
             fleshB = 150;

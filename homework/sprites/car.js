@@ -35,6 +35,18 @@ $(function () {
         sprites.renderingContext.restore();
     };
 
+    // JD: Little spacing note: for function literals, we like to add a space
+    //     between "function" and "("---the logic being, when we use a function
+    //     statement, we put the name in between:
+    //
+    //         function nameOfFunction(arguments)
+    //
+    //     So when we have a function literal, the name simply goes away...but
+    //     not the space.  And so:
+    //
+    //         function (arguments)
+    //
+    //     Anyway, that's the rationale.
     window['sprites'].drawSteeringWheel = function() {
         sprites.renderingContext.save();
         sprites.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
