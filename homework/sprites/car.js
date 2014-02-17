@@ -1,38 +1,38 @@
 $(function () {
-    window['sprites'] = window['sprites'] || {};
-    window['sprites'].car = {
+    window['racers'] = window['racers'] || {};
+    window['racers'].car = {
         x: 100,
         y: 175
     };
     
     
-    window['sprites'].drawCar = function () {
-        sprites.drawBody();
-        sprites.drawWindshield();
-        sprites.drawSteeringWheel();
-        sprites.drawWheels();
-        sprites.drawHubcaps();
+    window['racers'].drawCar = function () {
+        racers.drawBody();
+        racers.drawWindshield();
+        racers.drawSteeringWheel();
+        racers.drawWheels();
+        racers.drawHubcaps();
     };
 
-    window['sprites'].drawBody = function () {
-        sprites.renderingContext.save();
-        sprites.renderingContext.fillStyle = "rgb(" + 90 + "," + 90 + "," + 100 + ")";
-        sprites.renderingContext.strokeStyle = "black";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.fillRect(sprites.car.x - 50, sprites.car.y + 60, 50, 50);
-        sprites.renderingContext.fillRect(sprites.car.x, sprites.car.y, 190, 110);
-        sprites.renderingContext.fillRect(sprites.car.x + 180, sprites.car.y - 20, 30, 20);
-        sprites.renderingContext.restore();
+    window['racers'].drawBody = function () {
+        racers.renderingContext.save();
+        racers.renderingContext.fillStyle = "rgb(" + 90 + "," + 90 + "," + 100 + ")";
+        racers.renderingContext.strokeStyle = "black";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.fillRect(racers.car.x - 50, racers.car.y + 60, 50, 50);
+        racers.renderingContext.fillRect(racers.car.x, racers.car.y, 190, 110);
+        racers.renderingContext.fillRect(racers.car.x + 180, racers.car.y - 20, 30, 20);
+        racers.renderingContext.restore();
     };
 
-    window['sprites'].drawWindshield = function () {
-        sprites.renderingContext.save();
-        sprites.renderingContext.fillStyle = "rgb(" + 240 + "," + 240 + "," + 240 + ")";
-        sprites.renderingContext.strokeStyle = "white";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.strokeRect(sprites.car.x, sprites.car.y, 70, 60);
-        sprites.renderingContext.fillRect(sprites.car.x, sprites.car.y, 70, 60);
-        sprites.renderingContext.restore();
+    window['racers'].drawWindshield = function () {
+        racers.renderingContext.save();
+        racers.renderingContext.fillStyle = "rgb(" + 240 + "," + 240 + "," + 240 + ")";
+        racers.renderingContext.strokeStyle = "white";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.strokeRect(racers.car.x, racers.car.y, 70, 60);
+        racers.renderingContext.fillRect(racers.car.x, racers.car.y, 70, 60);
+        racers.renderingContext.restore();
     };
 
     // JD: Little spacing note: for function literals, we like to add a space
@@ -47,40 +47,40 @@ $(function () {
     //         function (arguments)
     //
     //     Anyway, that's the rationale.
-    window['sprites'].drawSteeringWheel = function() {
-        sprites.renderingContext.save();
-        sprites.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
-        sprites.renderingContext.strokeStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
-        sprites.renderingContext.moveTo(sprites.car.x + 60, sprites.car.y + 50);
-        sprites.renderingContext.arc(sprites.car.x + 50, sprites.car.y + 50, 10, 0, Math.PI * 2);
-        sprites.renderingContext.arc(sprites.car.x + 50, sprites.car.y + 50, 12, 0, Math.PI * 2);
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+    window['racers'].drawSteeringWheel = function() {
+        racers.renderingContext.save();
+        racers.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        racers.renderingContext.strokeStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        racers.renderingContext.moveTo(racers.car.x + 60, racers.car.y + 50);
+        racers.renderingContext.arc(racers.car.x + 50, racers.car.y + 50, 10, 0, Math.PI * 2);
+        racers.renderingContext.arc(racers.car.x + 50, racers.car.y + 50, 12, 0, Math.PI * 2);
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
     };
 
-    window['sprites'].drawWheels = function() {
-        sprites.renderingContext.save();
-        sprites.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.arc(sprites.car.x + 50, sprites.car.y + 110, 30, 0, Math.PI * 2);
-        sprites.renderingContext.moveTo(sprites.car.x + 180, sprites.car.y + 110);
-        sprites.renderingContext.arc(sprites.car.x + 150, sprites.car.y + 110, 30, 0, Math.PI * 2);
-        sprites.renderingContext.fill();
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+    window['racers'].drawWheels = function() {
+        racers.renderingContext.save();
+        racers.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.arc(racers.car.x + 50, racers.car.y + 110, 30, 0, Math.PI * 2);
+        racers.renderingContext.moveTo(racers.car.x + 180, racers.car.y + 110);
+        racers.renderingContext.arc(racers.car.x + 150, racers.car.y + 110, 30, 0, Math.PI * 2);
+        racers.renderingContext.fill();
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
 
     };
 
-    window['sprites'].drawHubcaps = function() {
-        sprites.renderingContext.save();
-        sprites.renderingContext.fillStyle = "rgb(" + 210 + "," + 210 + "," + 210 + ")";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.arc(sprites.car.x + 50, sprites.car.y + 110, 15, 0, Math.PI * 2);
-        sprites.renderingContext.moveTo(sprites.car.x + 180, sprites.car.y + 110);
-        sprites.renderingContext.arc(sprites.car.x + 150, sprites.car.y + 110, 15, 0, Math.PI * 2);
-        sprites.renderingContext.fill();
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+    window['racers'].drawHubcaps = function() {
+        racers.renderingContext.save();
+        racers.renderingContext.fillStyle = "rgb(" + 210 + "," + 210 + "," + 210 + ")";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.arc(racers.car.x + 50, racers.car.y + 110, 15, 0, Math.PI * 2);
+        racers.renderingContext.moveTo(racers.car.x + 180, racers.car.y + 110);
+        racers.renderingContext.arc(racers.car.x + 150, racers.car.y + 110, 15, 0, Math.PI * 2);
+        racers.renderingContext.fill();
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
     };
     
 });

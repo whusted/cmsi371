@@ -1,68 +1,68 @@
 $(function () {
-    window['sprites'] = window['sprites'] || {};
+    window['racers'] = window['racers'] || {};
 
-    window['sprites'].geoff = {
+    window['racers'].geoff = {
         x: 50,
         y: 50
     };
 
-    window['sprites'].drawGeoff = function () {
-        sprites.drawGeoffsHead();
-        sprites.drawGeoffsGlasses();
-        sprites.drawGeoffsSmile();
+    window['racers'].drawGeoff = function (renderingContext) {
+        racers.drawGeoffsHead();
+        racers.drawGeoffsGlasses();
+        racers.drawGeoffsSmile();
     };
 
-    window['sprites'].drawGeoffsHead = function() {
+    window['racers'].drawGeoffsHead = function() {
         // JD: Ooooh, parameterize this and you can totally make Geoff blush :)
         var fleshR = 255,
             fleshG = 204,
             fleshB = 150;
 
-        sprites.renderingContext.save();
-        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
-        sprites.renderingContext.scale(1.0, 1.25);
-        sprites.renderingContext.fillStyle = "rgb(" + fleshR + "," + fleshG + "," + fleshB + ")";
-        sprites.renderingContext.strokeStyle = "black";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
-        sprites.renderingContext.fill();
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+        racers.renderingContext.save();
+        racers.renderingContext.translate(racers.geoff.x, racers.geoff.y);
+        racers.renderingContext.scale(1.0, 1.25);
+        racers.renderingContext.fillStyle = "rgb(" + fleshR + "," + fleshG + "," + fleshB + ")";
+        racers.renderingContext.strokeStyle = "black";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.arc(0, 0, 20, 0, Math.PI * 2);
+        racers.renderingContext.fill();
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
     };
 
-    window['sprites'].drawGeoffsGlasses = function() {
-        sprites.renderingContext.save();
-        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.arc(-10, -5, 7, 0, Math.PI * 2);
-        sprites.renderingContext.moveTo(-3, -5);
-        sprites.renderingContext.lineTo(3, -5);
-        sprites.renderingContext.moveTo(17, -5);
-        sprites.renderingContext.arc(10, -5, 7, 0, Math.PI * 2);
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+    window['racers'].drawGeoffsGlasses = function() {
+        racers.renderingContext.save();
+        racers.renderingContext.translate(racers.geoff.x, racers.geoff.y);
+        racers.renderingContext.beginPath();
+        racers.renderingContext.arc(-10, -5, 7, 0, Math.PI * 2);
+        racers.renderingContext.moveTo(-3, -5);
+        racers.renderingContext.lineTo(3, -5);
+        racers.renderingContext.moveTo(17, -5);
+        racers.renderingContext.arc(10, -5, 7, 0, Math.PI * 2);
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
     };
 
-    window['sprites'].drawGeoffsSmile = function() {
-        sprites.renderingContext.save();
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
-        sprites.renderingContext.scale(1.0, 1.0);
-        sprites.renderingContext.arc(0, 10, 7, 0, Math.PI);
-        sprites.renderingContext.stroke();
-        sprites.renderingContext.restore();
+    window['racers'].drawGeoffsSmile = function() {
+        racers.renderingContext.save();
+        racers.renderingContext.beginPath();
+        racers.renderingContext.translate(racers.geoff.x, racers.geoff.y);
+        racers.renderingContext.scale(1.0, 1.0);
+        racers.renderingContext.arc(0, 10, 7, 0, Math.PI);
+        racers.renderingContext.stroke();
+        racers.renderingContext.restore();
     };
 
-    window['sprites'].drawGeoffShirt = function () {
-        sprites.renderingContext.save();
-        sprites.renderingContext.translate(sprites.geoff.x, sprites.geoff.y);
-        sprites.renderingContext.fillStyle = "rgb(" + 250 + "," + 250 + "," + 250 + ")";
-        sprites.renderingContext.strokeStyle = "black";
-        sprites.renderingContext.beginPath();
-        sprites.renderingContext.strokeRect(-37, 25, 75, 75);
-        sprites.renderingContext.fillRect(-37, 25, 75, 75);
+    window['racers'].drawGeoffShirt = function () {
+        racers.renderingContext.save();
+        racers.renderingContext.translate(racers.geoff.x, racers.geoff.y);
+        racers.renderingContext.fillStyle = "rgb(" + 250 + "," + 250 + "," + 250 + ")";
+        racers.renderingContext.strokeStyle = "black";
+        racers.renderingContext.beginPath();
+        racers.renderingContext.strokeRect(-37, 25, 75, 75);
+        racers.renderingContext.fillRect(-37, 25, 75, 75);
 
-        sprites.renderingContext.restore();
+        racers.renderingContext.restore();
 
     };
 });
