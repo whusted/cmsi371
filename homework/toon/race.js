@@ -278,8 +278,16 @@ $(function () {
                     {
                         frame: 300,
                         tx: 1000,
+                        ty: 5,
+                        ease: KeyframeTweener.quinticEaseIn
+                    },
+                    
+                    {
+                        frame: 350,
+                        tx: -100,
                         ty: 5
                     }
+
              ]
             }
         ];
