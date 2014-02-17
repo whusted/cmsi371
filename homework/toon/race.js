@@ -31,32 +31,23 @@ $(function () {
                 keyframes: [
                     {
                         frame: 0,
-                        tx: -100,
-                        ty: -100,
+                        tx: 10,
+                        ty: 20,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 30,
-                        tx: 10,
-                        ty: 10,
-                        ease: KeyframeTweener.quadEaseInOut
+                        frame: 50,
+                        tx: 75,
+                        ty: 50,
+                        ease: KeyframeTweener.backInCubic
                     },
 
                     {
-                        frame: 80,
-                        tx: 80,
-                        ty: 60,
-                        rotate: 60 // Keyframe.rotate uses degrees.
-                    },
-
-                    {
-                        frame: 160,
-                        tx: 600,
-                        ty: -2000,
-                        sx: 5,
-                        sy: 5,
-                        ease: KeyframeTweener.quadEaseOut
+                        frame: 130,
+                        tx: 400,
+                        ty: 50,
+                        //ease: KeyframeTweener.backInCubic
                     }
                 ]
             },
@@ -73,8 +64,8 @@ $(function () {
                 keyframes: [
                     {
                         frame: 50,
-                        tx: 300,
-                        ty: 600,
+                        tx: 75,
+                        ty: 50,
                         sx: 0.5,
                         sy: 0.5,
                         ease: KeyframeTweener.quadEaseOut
@@ -111,17 +102,17 @@ $(function () {
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 300,
-                        ty: 600,
+                        tx: 50,
+                        ty: 50,
                         sx: 0.5,
                         sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
+                        ease: KeyframeTweener.backInCubic
                     },
 
                     {
                         frame: 100,
                         tx: 300,
-                        ty: 0,
+                        ty: 50,
                         sx: 3,
                         sy: 0.25,
                         ease: KeyframeTweener.quadEaseOut
@@ -130,9 +121,7 @@ $(function () {
                     {
                         frame: 150,
                         tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5
+                        ty: 50
                     }
                 ]
             }
