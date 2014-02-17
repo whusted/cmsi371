@@ -5,12 +5,12 @@
 
 var KeyframeTweener = {
     // The module comes with a library of common easing functions.
-    backInCubic: function (currentTime, start, distance, duration) {
+    backThenForwardSmall: function (currentTime, start, distance, duration) {
       var ts = (currentTime/=duration)*currentTime;
       var tc = ts*currentTime;
-      return start+distance*(4*tc + -3*ts);
+      return start+distance*(4*tc + -2*ts);
     },
-    
+
     linear: function (currentTime, start, distance, duration) {
         var percentComplete = currentTime / duration;
         return distance * percentComplete + start;

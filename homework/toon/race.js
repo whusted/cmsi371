@@ -5,22 +5,7 @@
 $(function () {
     var canvas = document.getElementById("canvas"),
 
-        // First, a selection of "drawing functions" from which we
-        // can choose.  Their common trait: they all accept a single
-        // renderingContext argument.
-        square = function (renderingContext) {
-            renderingContext.fillStyle = "blue";
-            renderingContext.fillRect(-20, -20, 40, 40);
-        },
-
-        circle = function (renderingContext) {
-            renderingContext.strokeStyle = "red";
-            renderingContext.beginPath();
-            renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
-            renderingContext.stroke();
-        },
-
-        // Then, we have "easing functions" that determine how
+        //We have "easing functions" that determine how
         // intermediate frames are computed.
 
         // Now, to actually define the animated sprites.  Each sprite
@@ -31,100 +16,133 @@ $(function () {
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 10,
+                        tx: 1300,
                         ty: 20,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 50,
-                        tx: 75,
+                        frame: 75,
+                        tx: 1100,
                         ty: 50,
-                        ease: KeyframeTweener.backInCubic
-                    },
-
-                    {
-                        frame: 130,
-                        tx: 400,
-                        ty: 50,
-                        //ease: KeyframeTweener.backInCubic
-                    }
-                ]
-            },
-
-            {
-                draw: racers.drawGeoff,
-
-                predraw: function (currentFrame) {
-                    if (currentFrame % 30) {
-                        return;
-                    }
-                },
-
-                keyframes: [
-                    {
-                        frame: 50,
-                        tx: 75,
-                        ty: 50,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
+                        //bobLevel: 0.5
+                        //rotate: 60
                     },
 
                     {
                         frame: 100,
-                        tx: 300,
-                        ty: 0,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 150,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5
-                    }
-                ]
-            },
-
-            {
-                draw: racers.drawCar,
-
-                predraw: function (currentFrame) {
-                    if (currentFrame % 30) {
-                        return;
-                    }
-                },
-
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 50,
-                        ty: 50,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.backInCubic
-                    },
-
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 50,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 150,
-                        tx: 300,
+                        tx: 1100,
                         ty: 50
+                        //rotate: -60,
+                        //ease: KeyframeTweener.backInCubic
+                    },
+
+                    {
+                        frame: 110,
+                        tx: 1100,
+                        ty: 45
+                    },
+
+                    {
+                        frame: 120,
+                        tx: 1100,
+                        ty: 55
+                    },
+
+                    {
+                        frame: 140,
+                        tx: 1100,
+                        ty: 50,
+                        ease: KeyframeTweener.backThenForwardSmall
+                    },
+
+                    {
+                        frame: 170,
+                        tx: 10,
+                        ty: 600
+                    },
+
+                    {
+                        frame: 180,
+                        tx: 10,
+                        ty: 600
                     }
                 ]
             }
+
+            // {
+            //     draw: racers.drawGeoff,
+
+            //     predraw: function (currentFrame) {
+            //         if (currentFrame % 30) {
+            //             return;
+            //         }
+            //     },
+
+            //     keyframes: [
+            //         {
+            //             frame: 20,
+            //             tx: 75,
+            //             ty: 50,
+            //             sx: 0.5,
+            //             sy: 0.5,
+            //             ease: KeyframeTweener.quadEaseOut
+            //         },
+
+            //         {
+            //             frame: 100,
+            //             tx: 300,
+            //             ty: 0,
+            //             sx: 3,
+            //             sy: 0.25,
+            //             ease: KeyframeTweener.quadEaseOut
+            //         },
+
+            //         {
+            //             frame: 150,
+            //             tx: 300,
+            //             ty: 600,
+            //             sx: 0.5,
+            //             sy: 0.5
+            //         }
+            //     ]
+            // },
+
+            // {
+            //     draw: racers.drawCar,
+
+            //     predraw: function (currentFrame) {
+            //         if (currentFrame % 30) {
+            //             return;
+            //         }
+            //     },
+
+            //     keyframes: [
+            //         {
+            //             frame: 0,
+            //             tx: 50,
+            //             ty: 50,
+            //             sx: 0.5,
+            //             sy: 0.5,
+            //             ease: KeyframeTweener.backInCubic
+            //         },
+
+            //         {
+            //             frame: 100,
+            //             tx: 300,
+            //             ty: 50,
+            //             sx: 3,
+            //             sy: 0.25,
+            //             ease: KeyframeTweener.quadEaseOut
+            //         },
+
+            //         {
+            //             frame: 150,
+            //             tx: 300,
+            //             ty: 50
+            //         }
+            //  ]
+            //}
         ];
 
     // Finally, we initialize the engine.  Mainly, it needs
