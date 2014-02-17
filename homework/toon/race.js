@@ -18,22 +18,24 @@ $(function () {
                         frame: 25,
                         tx: 1300,
                         ty: 20,
-                        ease: KeyframeTweener.linear
+                        ease: KeyframeTweener.linear,
+                        bobLevel: 0.5,
+                        scale: 0.5
                     },
 
                     {
                         frame: 75,
                         tx: 1100,
                         ty: 50,
-                        bobLevel: 0.5
-                        //rotate: 60
+                        bobLevel: 0
                     },
 
                     {
                         frame: 100,
                         tx: 1100,
                         ty: 50,
-                        bobLevel: 0
+                        bobLevel: 0.5,
+                        scale: 0
                         //rotate: -60,
                         //ease: KeyframeTweener.backInCubic
                     },
@@ -281,7 +283,7 @@ $(function () {
                         ty: 5,
                         ease: KeyframeTweener.quinticEaseIn
                     },
-                    
+
                     {
                         frame: 350,
                         tx: -100,
@@ -300,13 +302,12 @@ $(function () {
         renderingContext: racers.renderingContext,
         width: canvas.width,
         height: canvas.height,
-        sprites: cartoons
-        // background: function (renderingContext) {
-        //     renderingContext.save();
-        //     renderingContext.fillStyle = "white";
-        //     renderingContext.fillRect(0, 0, canvas.width, canvas.height);
-        //     //sprites.car.drawCar(renderingContext);
-        //     renderingContext.restore();
-        // }
+        sprites: cartoons,
+        background: function (renderingContext) {
+            renderingContext.save();
+            renderingContext.fillStyle = "grey";
+            renderingContext.fillRect(0, 0, canvas.width, canvas.height);
+            renderingContext.restore();
+        }
     });
 });
