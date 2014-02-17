@@ -32,6 +32,11 @@ var KeyframeTweener = {
                 (distance / 2) * percentComplete * percentComplete + start :
                 (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
     },
+    quinticEaseIn: function(currentTime, start, distance, duration) {
+        var ts = (currentTime/=duration)*currentTime;
+        var tc = ts*currentTime;
+        return start+distance*(tc*ts);
+    },
 
     // The big one: animation initialization.  The settings parameter
     // is expected to be a JavaScript object with the following
