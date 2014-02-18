@@ -28,8 +28,7 @@ $(function () {
                         tx: 1300,
                         ty: 20,
                         ease: KeyframeTweener.linear,
-                        bob: 0.5,
-                        scale: 0.5
+                        bob: 0.5
                     },
 
                     {
@@ -43,24 +42,21 @@ $(function () {
                         frame: 100,
                         tx: 1100,
                         ty: 50,
-                        bob: 0.5,
-                        scale: 0
-                        //rotate: -60,
-                        //ease: KeyframeTweener.backInCubic
+                        bob: 0.5
                     },
 
                     {
                         frame: 100,
                         tx: 1100,
-                        ty: 50
-                        //rotate: -60,
-                        //ease: KeyframeTweener.backInCubic
+                        ty: 50,
+                        bob: 0.4
                     },
 
                     {
                         frame: 115,
                         tx: 1100,
-                        ty: 45
+                        ty: 45,
+                        bob: 0.25
                     },
 
                     {
@@ -72,7 +68,8 @@ $(function () {
                     {
                         frame: 140,
                         tx: 1100,
-                        ty: 45
+                        ty: 45,
+                        bob: 0
                     },
 
                     {
@@ -129,44 +126,19 @@ $(function () {
                         frame: 290,
                         tx: 1150,
                         ty: 170
-                    },
-
-                    // {
-                    //     frame: 140,
-                    //     tx: 1100,
-                    //     ty: 50,
-                    //     ease: KeyframeTweener.backThenForwardSmall
-                    // },
-
-                    // {
-                    //     frame: 190,
-                    //     tx: 50,
-                    //     ty: 600
-                    // }
-
-                    // {
-                    //     frame: 200,
-                    //     tx: 10,
-                    //     ty: 600
-                    // }
+                    }
                 ]
             },
 
             {
                 draw: racers.drawGeoff,
 
-                predraw: function (currentFrame) {
-                    if (currentFrame % 30) {
-                        return;
-                    }
-                },
-
                 keyframes: [
                     {
                         frame: 100,
                         tx: 1300,
                         ty: 10,
-                        ease: KeyframeTweener.linear
+                        ease: KeyframeTweener.quinticEaseIn
                     },
 
                     {
@@ -174,7 +146,6 @@ $(function () {
                         tx: 1000,
                         ty: 10,
                         bobLevel: 0.5
-                        //rotate: 60
                     },
 
                     {
@@ -182,16 +153,12 @@ $(function () {
                         tx: 1000,
                         ty: 15,
                         bobLevel: 0
-                        //rotate: -60,
-                        //ease: KeyframeTweener.backInCubic
                     },
 
                     {
                         frame: 125,
                         tx: 1000,
                         ty: 20
-                        //rotate: -60,
-                        //ease: KeyframeTweener.backInCubic
                     },
 
                     {
@@ -251,33 +218,29 @@ $(function () {
                     {
                         frame: 250,
                         tx: 1000,
-                        ty: 45
+                        ty: 45,
+                        //ease: KeyframeTweener.backThenForwardSmall
                     },
 
                     //Head towards the car
 
                     {
                         frame: 270,
-                        tx: 1150,
-                        ty: 170
+                        tx: 1200,
+                        ty: 200,
+                        ease: KeyframeTweener.backThenForwardSmall
                     },
 
                     {
                         frame: 290,
-                        tx: 1150,
-                        ty: 170
+                        tx: 1200,
+                        ty: 200
                     },
                 ]
             },
 
             {
                 draw: racers.drawCar,
-
-                predraw: function (currentFrame) {
-                    if (currentFrame % 30) {
-                        return;
-                    }
-                },
 
                 keyframes: [
                     {
@@ -290,7 +253,7 @@ $(function () {
                         frame: 300,
                         tx: 1000,
                         ty: 5,
-                        ease: KeyframeTweener.quinticEaseIn
+                        ease: KeyframeTweener.backThenForwardSmall
                     },
 
                     {

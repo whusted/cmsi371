@@ -160,7 +160,6 @@ var KeyframeTweener = {
                         }
 
                         // Draw the sprite.
-                        console.log(racers.willy.bobLevel);
                         sprites[i].draw(renderingContext);
 
                         // Clean up.
