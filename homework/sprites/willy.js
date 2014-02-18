@@ -33,6 +33,7 @@ $(function () {
     window['racers'].drawWillysSmile = function(renderingContext) {
         racers.renderingContext.save();
         racers.renderingContext.translate(racers.willy.x, racers.willy.y);
+        racers.renderingContext.scale(1.0 + racers.willy.bobLevel, 1.0 + racers.willy.bobLevel);
         racers.renderingContext.beginPath();
         racers.renderingContext.arc(0, 10, 7, 0, Math.PI);
         racers.renderingContext.stroke();
@@ -42,6 +43,7 @@ $(function () {
     window['racers'].drawWillysEyes = function(renderingContext) {
         racers.renderingContext.save();
         racers.renderingContext.translate(racers.willy.x, racers.willy.y);
+        racers.renderingContext.scale(1.0 + racers.willy.bobLevel, 1.0 + racers.willy.bobLevel);
         racers.renderingContext.beginPath();
         racers.renderingContext.arc(8, -3, 2.5, 0, Math.PI * 2);
         racers.renderingContext.moveTo(-5, -3);
