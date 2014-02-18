@@ -276,8 +276,10 @@ $(function () {
         sprites: cartoons,
         background: function (renderingContext) {
             renderingContext.save();
-            renderingContext.fillStyle = "grey";
+            renderingContext.fillStyle = "green";
             renderingContext.fillRect(0, 0, canvas.width, canvas.height);
+            renderingContext.fillStyle = "black";
+            renderingContext.fillRect(0, 250, canvas.width, 200)
             renderingContext.restore();
         }
     });

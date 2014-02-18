@@ -47,7 +47,7 @@ $(function () {
     //         function (arguments)
     //
     //     Anyway, that's the rationale.
-    window['racers'].drawSteeringWheel = function() {
+    window['racers'].drawSteeringWheel = function () {
         racers.renderingContext.save();
         racers.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
         racers.renderingContext.strokeStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
@@ -58,9 +58,9 @@ $(function () {
         racers.renderingContext.restore();
     };
 
-    window['racers'].drawWheels = function() {
+    window['racers'].drawWheels = function () {
         racers.renderingContext.save();
-        racers.renderingContext.fillStyle = "rgb(" + 10 + "," + 10 + "," + 10 + ")";
+        racers.renderingContext.fillStyle = "rgb(" + 30 + "," + 30 + "," + 30 + ")";
         racers.renderingContext.beginPath();
         racers.renderingContext.arc(racers.car.x + 50, racers.car.y + 110, 30, 0, Math.PI * 2);
         racers.renderingContext.moveTo(racers.car.x + 180, racers.car.y + 110);
@@ -71,7 +71,7 @@ $(function () {
 
     };
 
-    window['racers'].drawHubcaps = function() {
+    window['racers'].drawHubcaps = function () {
         racers.renderingContext.save();
         racers.renderingContext.fillStyle = "rgb(" + 210 + "," + 210 + "," + 210 + ")";
         racers.renderingContext.beginPath();
