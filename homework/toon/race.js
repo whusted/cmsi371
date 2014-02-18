@@ -111,13 +111,14 @@ $(function () {
                     {
                         frame: 250,
                         tx: 1100,
-                        ty: 45
+                        ty: 45,
+                        ease: KeyframeTweener.quinticEaseIn
                     },
 
                     //Head towards the car
 
                     {
-                        frame: 270,
+                        frame: 265,
                         tx: 1150,
                         ty: 170
                     },
@@ -137,8 +138,7 @@ $(function () {
                     {
                         frame: 100,
                         tx: 1300,
-                        ty: 10,
-                        ease: KeyframeTweener.quinticEaseIn
+                        ty: 10                    
                     },
 
                     {
@@ -219,7 +219,7 @@ $(function () {
                         frame: 250,
                         tx: 1000,
                         ty: 45,
-                        //ease: KeyframeTweener.backThenForwardSmall
+                        ease: KeyframeTweener.quinticEaseIn
                     },
 
                     //Head towards the car
@@ -227,12 +227,11 @@ $(function () {
                     {
                         frame: 270,
                         tx: 1200,
-                        ty: 200,
-                        ease: KeyframeTweener.backThenForwardSmall
+                        ty: 200
                     },
 
                     {
-                        frame: 290,
+                        frame: 310,
                         tx: 1200,
                         ty: 200
                     },
@@ -245,13 +244,13 @@ $(function () {
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 1000,
+                        tx: 990,
                         ty: 5
                     },
 
                     {
                         frame: 300,
-                        tx: 1000,
+                        tx: 990,
                         ty: 5,
                         ease: KeyframeTweener.backThenForwardSmall
                     },
