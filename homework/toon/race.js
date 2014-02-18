@@ -269,14 +269,17 @@ $(function () {
         sprites: cartoons,
         background: function (renderingContext) {
             renderingContext.save();
+            //grass
             renderingContext.fillStyle = "green";
             renderingContext.fillRect(0, 0, canvas.width, canvas.height);
+            //road
             renderingContext.fillStyle = "black";
             renderingContext.fillRect(0, 250, canvas.width, 200);
+            //stripes for road
             for (var i = 0; i < 7; i++) {
                 renderingContext.fillStyle = "yellow";
                 renderingContext.fillRect(10 + (i * 200), 330, 100, 20);
-            }
+            };
             renderingContext.restore();
         }
     });
