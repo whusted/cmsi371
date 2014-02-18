@@ -127,8 +127,6 @@ var KeyframeTweener = {
                         // Set up our start and distance values, using defaults
                         // if necessary.
                         ease = startKeyframe.ease || KeyframeTweener.linear;
-                        blStart = startKeyframe.bobLevel || 0;
-                        blDistance = (endKeyframe.bobLevel || 0);
                         txStart = startKeyframe.tx || 0;
                         txDistance = (endKeyframe.tx || 0) - txStart;
                         tyStart = startKeyframe.ty || 0;
@@ -154,14 +152,11 @@ var KeyframeTweener = {
                         renderingContext.rotate(
                             ease(currentTweenFrame, rotateStart, rotateDistance, duration)
                         );
-                        // renderingContext.bobLevel(
-                        //     ease(currentTweenFrame, blStart, blDistance, duration)
-                        // );
 
 
                         // Do a sprite callback if they asked for one.
-                        if (sprites[i].predraw) {
-                            sprites[i].predraw(currentFrame);
+                        if (sprites[i].callback) {
+                            sprites[i].callback(ease, startKeyframe, endKeyframe, currentTweenFrame, duration);
                         }
 
                         // Draw the sprite.

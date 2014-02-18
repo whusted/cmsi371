@@ -13,13 +13,22 @@ $(function () {
         cartoons = [
             {
                 draw: racers.drawWilly,
+                callback: function (ease, startKeyframe, endKeyframe, currentTweenFrame, duration) {
+                    var aStart = startKeyframe.bob || 0,
+                        aDistance = (endKeyframe.bob || 0) - aStart;
+                    racers.willy.bobLevel = Math.min(
+                        Math.max(ease(currentTweenFrame, aStart, aDistance, duration), 0
+                        ), 2
+                    );
+                },
+
                 keyframes: [
                     {
                         frame: 25,
                         tx: 1300,
                         ty: 20,
                         ease: KeyframeTweener.linear,
-                        bobLevel: 0.5,
+                        bob: 0.5,
                         scale: 0.5
                     },
 
@@ -27,14 +36,14 @@ $(function () {
                         frame: 75,
                         tx: 1100,
                         ty: 50,
-                        bobLevel: 0
+                        bob: 0
                     },
 
                     {
                         frame: 100,
                         tx: 1100,
                         ty: 50,
-                        bobLevel: 0.5,
+                        bob: 0.5,
                         scale: 0
                         //rotate: -60,
                         //ease: KeyframeTweener.backInCubic
