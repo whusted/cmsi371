@@ -16,6 +16,29 @@ var NanoshopNeighborhood = {
         ];
     },
 
+    collapser: function (rgbaNeighborhood) {
+        var rMax = 0,
+            gMax = 0,
+            bMax = 0;
+        for (var i = 0; i < 9; i++) {
+            if (rgbaNeighborhood[i].r > rMax) {
+                rMax = rgbaNeighborhood[i].r;
+            }
+            if (rgbaNeighborhood[i].g > gMax) {
+                gMax = rgbaNeighborhood[i].g;
+            }
+            if (rgbaNeighborhood[i].b > bMax) {
+                bMax = rgbaNeighborhood[i].b;
+            }
+        }
+        return [
+            rMax,
+            gMax,
+            bMax,
+            rgbaNeighborhood[4].a
+        ];
+    },
+
     lighten: function (rgbaNeighborhood) {
         return [
             (rgbaNeighborhood[4].r + 5) * 1.1,
