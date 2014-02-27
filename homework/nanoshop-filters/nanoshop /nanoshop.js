@@ -11,15 +11,23 @@ var Nanoshop = {
      * pixel as a 4-element array representing an RGBA value.
      */
 
+    colorShiftLeft: function (r, g, b, a) {
+        var newR = g,
+            newG = b,
+            newB = r,
+            newA = a;
+        return [newR, newG, newB, newA];
+    },
+
     // This is a basic "darkener."
     darkener: function (r, g, b, a) {
         return [r / 2, g / 2, b / 2, a];
     },
     
-    colorShiftLeft: function (r, g, b, a) {
-        var newR = g,
-            newG = b,
-            newB = r,
+    inverter: function (r, g, b, a) {
+        var newR = Math.abs(255 - r),
+            newG = Math.abs(255 - g),
+            newB = Math.abs(255 - b),
             newA = a;
         return [newR, newG, newB, newA];
     },
