@@ -10,6 +10,12 @@ var Nanoshop = {
      * A filter is a function (r, g, b, a) that returns another
      * pixel as a 4-element array representing an RGBA value.
      */
+     
+    // This is a basic "darkener."
+    darkener: function (r, g, b, a) {
+        return [r / 2, g / 2, b / 2, a];
+    },
+
     applyFilter: function (imageData, filter) {
         // For every pixel, replace with something determined by the filter.
         var i,
