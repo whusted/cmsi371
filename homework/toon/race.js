@@ -109,7 +109,8 @@ $(function () {
                     },
 
                     //Head towards the car
-
+                    // JD: This is a well-placed comment.  Helps clarify the intent
+                    //     of the keyframes that follow.
                     {
                         frame: 265,
                         tx: 1150,
@@ -138,7 +139,7 @@ $(function () {
                         frame: 110,
                         tx: 1000,
                         ty: 10,
-                        bobLevel: 0.5
+                        bobLevel: 0.5 // JD: I suspect you aren't using this.
                     },
 
                     {
@@ -254,7 +255,7 @@ $(function () {
                         ty: 5
                     }
 
-             ]
+             ] // JD: Out-of-place indent here.
             }
         ];
 
