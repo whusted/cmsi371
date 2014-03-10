@@ -18,10 +18,10 @@
 
     // Some line segments.
     Primitives.lineBresenham(renderingContext, 5, 210, 204, 110, 1);
-    Primitives.lineBresenham(renderingContext, 210, 210, 409, 110, 5);
-    Primitives.lineBresenham(renderingContext, 415, 210, 614, 110, 10);
-    Primitives.lineBresenham(renderingContext, 620, 210, 819, 110, 20);
-    Primitives.lineBresenham(renderingContext, 825, 210, 1024, 110, 30);
+    Primitives.lineBresenham(renderingContext, 210, 210, 409, 110, 2);
+    Primitives.lineBresenham(renderingContext, 415, 210, 614, 110, 5);
+    Primitives.lineBresenham(renderingContext, 620, 210, 819, 110, 10);
+    Primitives.lineBresenham(renderingContext, 825, 210, 1024, 110, 20);
 
     // A few circles.
     Primitives.circleTrig(renderingContext, 105, 315, 100);
