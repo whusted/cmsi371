@@ -31,10 +31,10 @@ var KeyframeTweener = {
         return (percentComplete < 1) ?
                 (distance / 2) * percentComplete * percentComplete + start :
                 (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
-    },
+    }, // JD: Blank line please.
     quinticEaseIn: function(currentTime, start, distance, duration) {
         var ts = (currentTime/=duration)*currentTime;
-        var tc = ts*currentTime;
+        var tc = ts*currentTime; // JD: These expressions can be spaced out more.
         return start+distance*(tc*ts);
     },
 
