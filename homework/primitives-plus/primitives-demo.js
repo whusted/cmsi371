@@ -24,10 +24,10 @@
     Primitives.lineBresenham(renderingContext, 825, 210, 1024, 110, 20);
 
     // A few circles.
-    // One display of just one color inputed
+    // One display of just one color passed
     Primitives.circleBres1(renderingContext, 105, 315, 100, [2, 173, 100]);
-    // Four displays of 2 colors inputed
-    Primitives.circleDDA(renderingContext, 310, 315, 100, [200, 173, 20], [100, 39, 20]);
+    // Four displays of 2 colors passed
+    Primitives.circleDDA(renderingContext, 310, 315, 100, [200, 0, 20], [19, 200, 190]);
     Primitives.circleTrig(renderingContext, 515, 315, 100, [255, 255, 255], [20, 70, 250]);
     Primitives.circleBres2(renderingContext, 720, 315, 100, [100, 210, 0], [32, 32, 32]);
     Primitives.circleBres3(renderingContext, 925, 315, 100, [150, 2, 150], [5, 5, 5]);
