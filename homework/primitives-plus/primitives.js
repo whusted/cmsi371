@@ -282,6 +282,7 @@ var Primitives = {
      * function that all of the circle implementations will use...
      */
     plotCirclePoints: function (context, xc, yc, x, y, r, color1, color2) {
+        //Check if second color is passed
         if (color2 == undefined) {
           color1 = color1 || [0, 0, 0];
           this.setPixel(context, xc + x, yc + y, color1[0], color1[1], color1[2]);
@@ -292,6 +293,32 @@ var Primitives = {
           this.setPixel(context, xc - x, yc - y, color1[0], color1[1], color1[2]);
           this.setPixel(context, xc - y, yc + x, color1[0], color1[1], color1[2]);
           this.setPixel(context, xc - y, yc - x, color1[0], color1[1], color1[2]);
+        } else {
+
+            //Used to figure out what amount of each color is used for the gradient
+            var circleHeight = r * 2,
+                negY = (r - y) / circleHeight,
+                posY = (r + y) / circleHeight,
+                negX = (r - x) / circleHeight,
+                posX = (r + x) / circleHeight;
+
+            for (var i = -x; i < x; i++) {
+                this.setPixel(context, xc - i, yc + y, ((color1[0] * negY) + color2[0] * posY),
+                                                       ((color1[1] * negY) + color2[1] * posY),
+                                                       ((color1[2] * negY) + color2[2] * posY));
+                this.setPixel(context, xc - i, yc - y, ((color1[0] * posY) + color2[0] * negY), 
+                                                       ((color1[1] * posY) + color2[1] * negY), 
+                                                       ((color1[2] * posY) + color2[2] * negY));
+            }
+
+            for (var i = -y; i < y; i++) { 
+                this.setPixel(context, xc - i, yc + x, ((color1[0] * negX) + color2[0] * posX),
+                                                       ((color1[1] * negX) + color2[1] * posX),
+                                                       ((color1[2] * negX) + color2[2] * posX));
+                this.setPixel(context, xc - i, yc - x, ((color1[0] * posX) + color2[0] * negX), 
+                                                       ((color1[1] * posX) + color2[1] * negX), 
+                                                       ((color1[2] * posX) + color2[2] * negX));
+            }
         }
     },
 
