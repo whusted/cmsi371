@@ -29,7 +29,7 @@
     // Four displays of 2 colors passed
     Primitives.circleDDA(renderingContext, 310, 315, 100, [200, 0, 20], [19, 200, 190]);
     Primitives.circleTrig(renderingContext, 515, 315, 100, [255, 255, 255], [20, 70, 250]);
-    Primitives.circleBres2(renderingContext, 720, 315, 100, [100, 210, 0], [32, 32, 32]);
+    Primitives.circleBres2(renderingContext, 720, 315, 100, [100, 210, 0], [20, 32, 200]);
     Primitives.circleBres3(renderingContext, 925, 315, 100, [150, 2, 150], [5, 5, 5]);
     
 
