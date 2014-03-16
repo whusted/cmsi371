@@ -16,6 +16,8 @@
     Primitives.fillRect(renderingContext, 825, 5, 200, 100,
             [255, 0, 0], [255, 255, 0], [0, 200, 0], [0, 0, 100]);
 
+    // JD: Nicely selected range of demos here.
+
     // Some line segments.
     Primitives.lineBresenham(renderingContext, 5, 210, 204, 110, 1);
     Primitives.lineBresenham(renderingContext, 210, 210, 409, 110, 2);

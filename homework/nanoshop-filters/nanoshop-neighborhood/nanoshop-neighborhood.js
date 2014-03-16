@@ -39,6 +39,9 @@ var NanoshopNeighborhood = {
         ];
     },
 
+    // JD: Note that this one is no different from a single-pixel filter,
+    //     so nothing gained here with the neighborhood.  You should think
+    //     of another that uses said neighborhood.
     lighten: function (rgbaNeighborhood) {
         return [
             (rgbaNeighborhood[4].r + 5) * 1.1,
