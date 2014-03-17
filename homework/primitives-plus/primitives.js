@@ -254,10 +254,12 @@ var Primitives = {
 
         color = color || [0, 0, 0];
         while (true) {
-            if (counter > 0) {
+            if (counter > 0) { // JD: Or just "if (counter) {..."
+                // JD: Odd...this indent is by 2 but the else clause is by 4...?
+                //     (and of course the rest of the code indents by 4)
               this.setPixel(context, x, y, color[0], color[1], color[2]);
               counter--;
-            } else if (counter == 0) {
+            } else if (counter == 0) { // JD: Then "else" by itself :)
                 counter = dash;
             }
 
@@ -284,6 +286,7 @@ var Primitives = {
     plotCirclePoints: function (context, xc, yc, x, y, r, color1, color2) {
         //Check if second color is passed
         if (color2 == undefined) {
+            // JD: Weird indent-by-2-then-4 thing again...
           color1 = color1 || [0, 0, 0];
           this.setPixel(context, xc + x, yc + y, color1[0], color1[1], color1[2]);
           this.setPixel(context, xc + x, yc - y, color1[0], color1[1], color1[2]);
@@ -294,6 +297,7 @@ var Primitives = {
           this.setPixel(context, xc - y, yc + x, color1[0], color1[1], color1[2]);
           this.setPixel(context, xc - y, yc - x, color1[0], color1[1], color1[2]);
         } else {
+            // JD: Nicely done.
 
             //Used to figure out what amount of each color is used for the gradient
             var circleHeight = r * 2,

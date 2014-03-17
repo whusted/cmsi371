@@ -10,7 +10,7 @@ var Nanoshop = {
      * A filter is a function (r, g, b, a) that returns another
      * pixel as a 4-element array representing an RGBA value.
      */
-
+    // JD: Nice, all good, nothing to say actually :)
     colorShiftLeft: function (r, g, b, a) {
         var newR = g,
             newG = b,
