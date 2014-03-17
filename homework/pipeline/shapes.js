@@ -81,6 +81,7 @@ var Shapes = {
 
         // Connect top and bottom square
         indices.push(
+            
             [2, 7, 8],
             [2, 8, 3],
             [3, 8, 4],
@@ -89,11 +90,8 @@ var Shapes = {
             [1, 6, 7],
             [1, 4, 9],
             [1, 9, 6]
-            // [1, 9, 6],
-            // [4, 9, 1]
 
-
-            );
+        );
 
         return {
             vertices: vertices,
