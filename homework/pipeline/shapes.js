@@ -88,6 +88,7 @@ var Shapes = {
         return result;
     },
 
+
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as line segments.
