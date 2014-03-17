@@ -57,15 +57,43 @@ var Shapes = {
         var vertices = [],
             indices = [];
 
-        vertices.push([0.0, 0.0, 0.0]);
+        // First square
+        vertices.push([0.0, 0.3, 0.0]);
         
         for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 2) {
-            vertices.push([0.5 * Math.cos(theta), 0.0, 0.5 * Math.sin(theta)]);
+            vertices.push([0.5 * Math.cos(theta), 0.3, 0.5 * Math.sin(theta)]);
         }
 
         for (var i = 1; i <= 4; i++) {
             indices.push([0, i, (i === 4) ? 1 : (i + 1)]);
         }
+
+        // Second square
+        vertices.push([0.0, -0.3, 0.0]);
+        
+        for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 2) {
+            vertices.push([0.5 * Math.cos(theta), -0.3, 0.5 * Math.sin(theta)]);
+        }
+
+        for (var i = 6; i <= 9; i++) {
+            indices.push([5, i, (i === 9) ? 6 : (i + 1)]);
+        }
+
+        // Connect top and bottom square
+        indices.push(
+            [2, 7, 8],
+            [2, 8, 3],
+            [3, 8, 4],
+            [8, 9, 4],
+            [2, 1, 7],
+            [1, 6, 7],
+            [1, 4, 9],
+            [1, 9, 6]
+            // [1, 9, 6],
+            // [4, 9, 1]
+
+
+            );
 
         return {
             vertices: vertices,
