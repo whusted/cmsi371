@@ -248,7 +248,7 @@
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         // Recrusively draw subobjects/children of objects, if they exist
-        if (object.subobjects.length > 0) {
+        if (object.subobjects && object.subobjects.length > 0) {
             for (var i = 0; i < subobjects.length; i++) {
                 drawObject(subobjects[i]);
             }
