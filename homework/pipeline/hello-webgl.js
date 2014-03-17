@@ -188,6 +188,13 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+        
+        // Recrusively draw subobjects/children of objects, if they exist
+        if (object.subobjects.length > 0) {
+            for (var i = 0; i < subobjects.length; i++) {
+                drawObject(subobjects[i]);
+            }
+        }
     };
 
     /*
