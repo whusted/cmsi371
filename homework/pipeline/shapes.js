@@ -54,12 +54,27 @@ var Shapes = {
     },
 
     sphere: function () {
-      var vertices = [];
+      var vertices = [],
+          indices = [];
+
       // Center of the circle added
-      vertices.push([0.0, 0.6, 0.0]);
+      vertices.push([0.0, 0.0, 0.0]);
 
       for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 16) {
         vertices.push(0.5 * Math.cos(theta), 0.6, 0.5 * Math.sin(theta));
+      }
+
+      vertices = vertices.concat(vertices.map(function (vertex) {
+        return [vertex[0], 0.1, vertex[2]];
+      }));
+
+      for (var i = 1; i <= 32; i++) {
+        indices.push([0, i, (i === 32) ? 1 : (i + 1)]);
+      }
+
+      return {
+        vertices: vertices,
+        indices: indices
       }
 
     },
