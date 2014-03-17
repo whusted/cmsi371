@@ -176,9 +176,9 @@
         // },
 
         {
-            color: { r: 0.0, g: 1.0, b: 1.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
+            color: { r: 0.7, g: 0.7, b: 1.0 },
+            vertices: Shapes.toRawLineArray(Shapes.babyCarriage()),
+            mode: gl.LINES
         }
     ];
 
