@@ -126,6 +126,43 @@ var Shapes = {
 
     },
 
+    sphere: function (radius, latitudeBelts, longitudeBelts) {
+        var vertices = [],
+            indices = [];
+
+        for (var i = 0; i < latitudeBelts + 1; i += 1) {
+            var theta = (i * Math.PI) / latitudeBelts;
+            var sinTheta = Math.sin(theta);
+            var cosTheta = Math.cos(theta);
+
+            for (var j = 0; j < longitudeBelts + 1; j += 1) {
+                var phi = (j * 2 * Math.PI) / longitudeBelts;
+                var x = radius * Math.cos(phi) * sinTheta;
+                var y = radius * cosTheta;
+                var z = radius * Math.sin(phi) * sinTheta;
+
+                vertices.push([x, y, z]);
+            }
+        }
+
+        for (var i = 0; i < latitudeBelts + 1; i += 1) {
+
+            for (var j = 0; j < longitudeBelts + 1; j += 1) {
+                var top = (i * (longitudeBelts + 1)) + j;
+                var bottom = top + longitudeBelts + 1;
+
+                indices.push([top, bottom, top + 1]);
+                indices.push([bottom, bottom + 1, top + 1]);
+            }
+        }
+
+
+        return {
+            vertices: vertices,
+            indices: indices
+        };
+    },
+
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
