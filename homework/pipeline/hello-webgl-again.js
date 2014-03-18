@@ -177,8 +177,8 @@
 
         {
             color: { r: 0.7, g: 0.7, b: 1.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.babyCarriage()),
-            mode: gl.TRIANGLES
+            vertices: Shapes.toRawLineArray(Shapes.octagonCone()),
+            mode: gl.LINES
         }
     ];
 
