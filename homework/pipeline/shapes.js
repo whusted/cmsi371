@@ -141,6 +141,19 @@ var Shapes = {
       }
     },
 
+    sphere: function () {
+        var vertices = [],
+            indices = [];
+
+
+        return {
+            vertices: vertices,
+            indices: indices
+        };
+
+
+    }
+
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
