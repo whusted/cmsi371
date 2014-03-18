@@ -126,6 +126,13 @@ var Shapes = {
             indices.push([5, i, (i === 9) ? 6 : (i + 1)]);
         }
 
+        indices.push(
+            [1, 4, 5]
+            //[]
+
+
+            );
+
 
 
       return {
