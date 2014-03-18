@@ -100,47 +100,6 @@ var Shapes = {
 
     },
 
-    babyCarriage: function () {
-        var vertices = [],
-            indices = [];
-
-        // First side
-        vertices.push([0.0, 0.2, 0.0]);
-        
-        for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 5) {
-            vertices.push([0.5 * Math.cos(theta), 0.2, 0.5 * Math.sin(theta)]);
-        }
-
-        for (var i = 1; i <= 4; i++) {
-            indices.push([0, i, (i === 4) ? 1 : (i + 1)]);
-        }
-
-        // Second side
-        vertices.push([0.0, -0.2, 0.0]);
-
-        for (var theta = 0; theta < Math.PI * 2; theta += Math.PI / 5) {
-            vertices.push([0.5 * Math.cos(theta), -0.2, 0.5 * Math.sin(theta)]);
-        }
-
-        for (var i = 6; i <= 9; i++) {
-            indices.push([5, i, (i === 9) ? 6 : (i + 1)]);
-        }
-
-        indices.push(
-            [1, 4, 5]
-            //[]
-
-
-            );
-
-
-
-      return {
-        vertices: vertices,
-        indices: indices
-      }
-    },
-
     octagonCone: function () {
         var vertices = [],
            indices = [];
@@ -153,7 +112,7 @@ var Shapes = {
       for (var i = 1; i <= 8; i += 1) {
         indices.push([0, i, (i === 8) ? 1 : (i + 1)]);
       }
-      
+
       for (var i = 1; i <= 7; i += 1) {
         indices.push([8, i, (i === 7) ? 1 : (i + 1)]);
       }
