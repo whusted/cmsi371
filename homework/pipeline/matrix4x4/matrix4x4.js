@@ -104,6 +104,15 @@ var Matrix4x4 = (function() {
         );
     };
 
+    matrix4x4.toDirectConsumption = function () {
+        var result = [];
+
+        for (var i = 0; i < 4; i++) {
+        	result.push(this.elements[i], this.elements[i + 4], this.elements[i + 8], this.elements[i + 12]);
+        }
+    	return new Matrix4x4(arr);
+    };
+
 
 
 
