@@ -39,6 +39,16 @@ var Matrix4x4 = (function() {
         return result;
     };
 
+    matrix4x4.getTranslationMatrix = function (dx, dy, dz) {
+
+    	return new Matrix4x4(
+            1, 0 , 0 , dx,
+            0 , 1, 0 , dy,
+            0 , 0 , 1, dz,
+            0, 0, 0, 1 
+    	);
+    };
+
 
 
 
