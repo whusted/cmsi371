@@ -6,9 +6,6 @@ var Matrix4x4 = (function() {
               0, 1, 0, 0,
               0, 0, 1, 0,
               0, 0, 0, 1 ];
-
-        console.log(this.elements);
-
     },
 
 	    checkDimensions = function (m1, m2) {

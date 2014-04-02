@@ -48,4 +48,29 @@ $(function () {
         
     });
 
+    test("Multiplication", function () {
+        var m1 = new Matrix4x4(),
+            m2 = new Matrix4x4(3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3),
+            m3 = m1.multiply(m2);
+        
+        equal(m3.dimensions(), 16, "Matrix size");
+        equal(m3.elements[0], 3, "First element by index");
+        equal(m3.elements[1], 1, "Second element by index");
+        equal(m3.elements[2], 4, "Third element by index");
+        equal(m3.elements[3], 1, "Fourth element by index");
+        equal(m3.elements[4], 5, "Fifth element by index");
+        equal(m3.elements[5], 9, "Sixth element by index");
+        equal(m3.elements[6], 2, "Seventh element by index");
+        equal(m3.elements[7], 6, "Eighth element by index");
+        equal(m3.elements[8], 5, "Ninth element by index");
+        equal(m3.elements[9], 3, "Tenth element by index");
+        equal(m3.elements[10], 5, "Eleventh element by index");
+        equal(m3.elements[11], 8, "Twelfth element by index");
+        equal(m3.elements[12], 9, "Thirteenth element by index");
+        equal(m3.elements[13], 7, "Fourteenth element by index");
+        equal(m3.elements[14], 9, "Fifteenth element by index");
+        equal(m3.elements[15], 3, "Sixteenth element by index");
+    });
+   
+
 });
