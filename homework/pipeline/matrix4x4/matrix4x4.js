@@ -59,6 +59,19 @@ var Matrix4x4 = (function() {
         );
     };
 
+    matrix4x4.getFrustumMatrix = function (r, l, t, b, n, f) {
+    	var width = r - l,
+    	    height = t - b,
+    	    depth = f - n;
+
+    	return new Matrix4x4(
+            ((2 * n) / width), 0 , ((r + l) / width), 0,
+            0, ((2 * n) / height), ((t + b) / height), 0,
+            0, 0, - ((f + n) / depth), - ((2 * n * f) / depth),
+            0,  0, -1, 0
+    	);
+    };
+
     matrix4x4.getOrthoMatrix = function (r, l, t, b, n, f) {
     	var width = r - l,
     	    height = t - b,
@@ -68,7 +81,7 @@ var Matrix4x4 = (function() {
             2 / width, 0, 0, - ((r + l) / width),
             0, 2 / height, 0, - ((t + b) / height),
             0, 0, - 2 / depth, - ((f + n) / depth),
-            0 , 0 , 0, 1
+            0, 0, 0, 1
     	);
     };
 
