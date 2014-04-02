@@ -129,7 +129,6 @@ var Matrix4x4 = (function() {
             0.0, 0.0, 0.0, 1.0
         );
     };
-    
 
     // Changes the rows to columns to be consumed by GL
     matrix4x4.toDirectConsumption = function () {
@@ -140,4 +139,15 @@ var Matrix4x4 = (function() {
         }
     	return result;
     };
+
+    // Array of elements of the matrix
+    matrix4x4.elements = function () {
+        return this.elements;
+    };
+    
+    matrix4x4.elementAt = function (n) {
+        return this.elements[n];
+    };
+
+
 })();
