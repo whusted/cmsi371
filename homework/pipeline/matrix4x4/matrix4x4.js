@@ -1,11 +1,14 @@
 var Matrix4x4 = (function() {
 	// Constructor with identity matrix default
 	var matrix4x4 = function () {
-        this.elements = arguments ? [].slice.call(arguments):
-            [ 1, 0 , 0 , 0,
-              0 , 1, 0 , 0,
-              0 , 0 , 1, 0,
+        this.elements = arguments.length > 0 ? [].slice.call(arguments):
+            [ 1, 0, 0, 0,
+              0, 1, 0, 0,
+              0, 0, 1, 0,
               0, 0, 0, 1 ];
+
+        console.log(this.elements);
+
     },
 
 	    checkDimensions = function (m1, m2) {
@@ -148,6 +151,8 @@ var Matrix4x4 = (function() {
     matrix4x4.elementAt = function (n) {
         return this.elements[n];
     };
+
+    return matrix4x4;
 
 
 })();
