@@ -25,6 +25,8 @@ var Matrix4x4 = (function() {
             col,
             sum;
 
+        checkDimensions(this, m);
+
         for (row = 0; row < 4; row++) {
             for (col = 0; col < 4; col++) {
             	// reset the indivdual sum each iteration
