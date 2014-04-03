@@ -127,8 +127,9 @@ $(function () {
     });
 
     test("Transformations", function() {
-        //var m1 = new Matrix4x4();
+
         var m = Matrix4x4.getTranslationMatrix(3,3,3);
+
         equal(m.dimensions(), 16, "Matrix size");
         equal(m.elements[0], 1, "First element by index");
         equal(m.elements[1], 0, "Second element by index");
@@ -149,6 +150,7 @@ $(function () {
 
 
         m = Matrix4x4.getScaleMatrix(3, 1, 4);
+
         equal(m.dimensions(), 16, "Matrix size");
         equal(m.elements[0], 3, "First element by index");
         equal(m.elements[1], 0, "Second element by index");
@@ -166,6 +168,28 @@ $(function () {
         equal(m.elements[13], 0, "Fourteenth element by index");
         equal(m.elements[14], 0, "Fifteenth element by index");
         equal(m.elements[15], 1, "Sixteenth element by index");
+
+        m = Matrix4x4.getRotationMatrix(180, .5, -.5, .5);
+
+        equal(m.dimensions(), 16, "Matrix size");
+        equal(m.elements[0], -0.33333333333333315, "First element by index");
+        equal(m.elements[1], -0.666666666666667, "Second element by index");
+        equal(m.elements[2], 0.6666666666666667, "Third element by index");
+        equal(m.elements[3], 0, "Fourth element by index");
+        equal(m.elements[4], -0.6666666666666667, "Fifth element by index");
+        equal(m.elements[5], -0.33333333333333315, "Sixth element by index");
+        equal(m.elements[6], -0.666666666666667, "Seventh element by index");
+        equal(m.elements[7], 0, "Eighth element by index");
+        equal(m.elements[8], 0.666666666666667, "Ninth element by index");
+        equal(m.elements[9], -0.6666666666666667, "Tenth element by index");
+        equal(m.elements[10], -0.33333333333333315, "Eleventh element by index");
+        equal(m.elements[11], 0, "Twelfth element by index");
+        equal(m.elements[12], 0, "Thirteenth element by index");
+        equal(m.elements[13], 0, "Fourteenth element by index");
+        equal(m.elements[14], 0, "Fifteenth element by index");
+        equal(m.elements[15], 1, "Sixteenth element by index");
+
+
 
     });
    

@@ -88,8 +88,6 @@ var Matrix4x4 = (function() {
     };
 
     matrix4x4.getRotationMatrix = function (angle, x, y, z) {
-        // In production code, this function should be associated
-        // with a matrix object with associated functions.
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
             c = Math.cos(angle * Math.PI / 180.0),
