@@ -71,15 +71,58 @@ $(function () {
         equal(m3.elements[14], 9, "Fifteenth element by index");
         equal(m3.elements[15], 3, "Sixteenth element by index");
 
+        m1 = new Matrix4x4(3, 0, 3, 4, 4, 7, 9, 1, 0, 1, 9, 7, 4, 8, 2, 4);
+        m3 = m1.multiply(m2);
+
+        equal(m3.dimensions(), 16, "Matrix size");
+        equal(m3.elements[0], 60, "First element by index");
+        equal(m3.elements[1], 40, "Second element by index");
+        equal(m3.elements[2], 63, "Third element by index");
+        equal(m3.elements[3], 39, "Fourth element by index");
+        equal(m3.elements[4], 101, "Fifth element by index");
+        equal(m3.elements[5], 101, "Sixth element by index");
+        equal(m3.elements[6], 84, "Seventh element by index");
+        equal(m3.elements[7], 121, "Eighth element by index");
+        equal(m3.elements[8], 113, "Ninth element by index");
+        equal(m3.elements[9], 85, "Tenth element by index");
+        equal(m3.elements[10], 110, "Eleventh element by index");
+        equal(m3.elements[11], 99, "Twelfth element by index");
+        equal(m3.elements[12], 98, "Thirteenth element by index");
+        equal(m3.elements[13], 110, "Fourteenth element by index");
+        equal(m3.elements[14], 78, "Fifteenth element by index");
+        equal(m3.elements[15], 80, "Sixteenth element by index");
+
+        m2 = new Matrix4x4(0, 2, 2, 2, 7, 3, 2, 9, 0, 3, 8, 5, 1, 6, 3, 1);
+        m3 = m1.multiply(m2);
+
+        equal(m3.dimensions(), 16, "Matrix size");
+        equal(m3.elements[0], 4, "First element by index");
+        equal(m3.elements[1], 39, "Second element by index");
+        equal(m3.elements[2], 42, "Third element by index");
+        equal(m3.elements[3], 25, "Fourth element by index");
+        equal(m3.elements[4], 50, "Fifth element by index");
+        equal(m3.elements[5], 62, "Sixth element by index");
+        equal(m3.elements[6], 97, "Seventh element by index");
+        equal(m3.elements[7], 117, "Eighth element by index");
+        equal(m3.elements[8], 14, "Ninth element by index");
+        equal(m3.elements[9], 72, "Tenth element by index");
+        equal(m3.elements[10], 95, "Eleventh element by index");
+        equal(m3.elements[11], 61, "Twelfth element by index");
+        equal(m3.elements[12], 60, "Thirteenth element by index");
+        equal(m3.elements[13], 62, "Fourteenth element by index");
+        equal(m3.elements[14], 52, "Fifteenth element by index");
+        equal(m3.elements[15], 94, "Sixteenth element by index");
+
+
+
         m2 = new Matrix4x4(3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 0, 0, 0, 1);
 
         throws(
             function () {
                 return m1.multiply(m2);
             },
-            "Check for non-square matrices"
+            "Check for wrong-dimensioned matrices"
         );
-
 
     });
 
