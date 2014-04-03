@@ -233,7 +233,6 @@ $(function () {
         equal(m.elements[15], 0, "Sixteenth element by index");
 
         m = Matrix4x4.getOrthoMatrix(2, -2, 2, -2, -2, 2);
-        console.log(m.elements);
 
         equal(m.dimensions(), 16, "Matrix size");
         equal(m.elements[0], 0.5, "First element by index");
