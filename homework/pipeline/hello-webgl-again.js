@@ -21,6 +21,7 @@
         // Important state variables.
         currentRotation = 0.0,
         currentInterval,
+        projectionMatrix,
         rotationMatrix,
         vertexPosition,
         vertexColor,
@@ -175,9 +176,15 @@
         //     mode: gl.LINES
         // },
 
+        // {
+        //     color: { r: 0.8, g: 0.2, b: 0.1 },
+        //     vertices: Shapes.toRawTriangleArray(Shapes.sphere(.5, 16, 16)),
+        //     mode: gl.TRIANGLES
+        // },
+
         {
-            color: { r: 0.8, g: 0.2, b: 0.1 },
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(.5, 16, 16)),
+            color: { r: 0.4, g: 0.7, b: 0.3 },
+            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
             mode: gl.TRIANGLES
         }
     ];
@@ -238,7 +245,15 @@
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
-    rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    rotationMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    projectionMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+
+    // Initialize projection matrix
+    gl.uniformMatrix4fv(projectionMatrix, 
+        gl.FALSE, 
+        new Float32Array(Matrix4x4.getOrthoMatrix(-2, 2, 2, -2, -2, 2).toDirectConsumption())
+    );
+
 
     /*
      * Displays an individual object.
