@@ -45,6 +45,24 @@ $(function () {
         equal(m.elements[13], 7, "Fourteenth element by index");
         equal(m.elements[14], 9, "Fifteenth element by index");
         equal(m.elements[15], 3, "Sixteenth element by index");
+
+        var m1 = m.toDirectConsumption();
+        equal(m1[0], 3, "First element by index");
+        equal(m1[1], 5, "First element by index");
+        equal(m1[2], 5, "First element by index");
+        equal(m1[3], 9, "First element by index");
+        equal(m1[4], 1, "First element by index");
+        equal(m1[5], 9, "First element by index");
+        equal(m1[6], 3, "First element by index");
+        equal(m1[7], 7, "First element by index");
+        equal(m1[8], 4, "First element by index");
+        equal(m1[9], 2, "First element by index");
+        equal(m1[10], 5, "First element by index");
+        equal(m1[11], 9, "First element by index");
+        equal(m1[12], 1, "First element by index");
+        equal(m1[13], 6, "First element by index");
+        equal(m1[14], 8, "First element by index");
+        equal(m1[15], 3, "First element by index");
         
     });
 
@@ -234,8 +252,6 @@ $(function () {
         equal(m.elements[13], 0, "Fourteenth element by index");
         equal(m.elements[14], 0, "Fifteenth element by index");
         equal(m.elements[15], 1, "Sixteenth element by index");
-
-
 
     });
     
