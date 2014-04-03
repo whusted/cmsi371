@@ -144,10 +144,6 @@ var Matrix4x4 = (function() {
     matrix4x4.elements = function () {
         return this.elements;
     };
-    
-    matrix4x4.elementAt = function (n) {
-        return this.elements[n];
-    };
 
     return matrix4x4;
 
