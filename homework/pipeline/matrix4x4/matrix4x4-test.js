@@ -229,7 +229,7 @@ $(function () {
         equal(m.elements[11], 2, "Twelfth element by index");
         equal(m.elements[12], 0, "Thirteenth element by index");
         equal(m.elements[13], 0, "Fourteenth element by index");
-        equal(m.elements[14], -1, "Fifteenth element by index");
+        equal(m.elements[14], 1, "Fifteenth element by index");
         equal(m.elements[15], 0, "Sixteenth element by index");
 
         m = Matrix4x4.getOrthoMatrix(2, -2, 2, -2, -2, 2);

@@ -186,6 +186,20 @@
             color: { r: 0.4, g: 0.7, b: 0.3 },
             vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
             mode: gl.TRIANGLES
+        },
+
+        {
+            color: { r: 1, g: 0.0, b: 0.3 },
+            tx: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
+            mode: gl.TRIANGLES
+        },
+
+        {
+            color: { r: 0, g: 0.0, b: 1 },
+            ty: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
+            mode: gl.TRIANGLES
         }
     ];
 
@@ -262,6 +276,22 @@
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+
+        // Build our instance transformation matrix.
+        var instanceMatrix = new Matrix4x4();
+
+        // Translate.
+        instanceMatrix = instanceMatrix.multiply(
+            Matrix4x4.getTranslationMatrix(
+                object.tx || 0, object.ty || 0, object.tz || 0
+            )
+        );
+
+        // Set it.
+        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
+            gl.FALSE,
+            new Float32Array(instanceMatrix.toDirectConsumption())
+        );
 
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);

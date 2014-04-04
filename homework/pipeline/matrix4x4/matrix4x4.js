@@ -69,8 +69,8 @@ var Matrix4x4 = (function() {
     	return new Matrix4x4(
             ((2 * n) / width), 0 , ((r + l) / width), 0,
             0, ((2 * n) / height), ((t + b) / height), 0,
-            0, 0, - ((f + n) / depth), - ((2 * n * f) / depth),
-            0,  0, -1, 0
+            0, 0, (f + n) / depth, - ((2 * n * f) / depth),
+            0,  0, 1, 0
     	);
     };
 
