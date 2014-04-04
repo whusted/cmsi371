@@ -127,23 +127,10 @@
     objectsToDraw = [
 
         {
-            color: { r: 0.4, g: 0.7, b: 0.3 },
-            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 1, g: 0.0, b: 0.3 },
-            tx: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 0, g: 0.0, b: 1 },
-            ty: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.octagonCone()),
-            mode: gl.TRIANGLES
+            color: { r: 0.4, g: 0.7, b: 0.8 },
+            angle: 160,
+            vertices: Shapes.toRawLineArray(Shapes.cube()),
+            mode: gl.LINES
         }
     ];
 
@@ -203,13 +190,13 @@
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
-    rotationMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
-    projectionMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
 
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getOrthoMatrix(-2, 2, 2, -2, -2, 2).toDirectConsumption())
+        new Float32Array(Matrix4x4.getOrthoMatrix(-1, 1, 1, -1, -1, 1).toDirectConsumption())
     );
 
 
@@ -226,8 +213,12 @@
 
         // Translate.
         instanceMatrix = instanceMatrix.multiply(
-            Matrix4x4.getTranslationMatrix(
-                object.tx || 0, object.ty || 0, object.tz || 0
+            Matrix4x4.getRotationMatrix(
+                object.angle || 1, object.rx || 1, object.ry || 1, object.rz || 1
+            ).multiply(
+                Matrix4x4.getTranslationMatrix(
+                    object.tx || 0, object.ty || 0, object.tz || 0
+            )
             )
         );
 
