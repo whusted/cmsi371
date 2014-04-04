@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>My Scene</title>
-        <link rel="stylesheet" href="my_scene.css" />
+        <title>Hello WebGL (again)</title>
+        <link rel="stylesheet" href="hello-webgl-again.css" />
     </head>
     <body>
-        <h1>My Scene</h1>
+        <h1>Hello WebGL (again)!</h1>
 
         <p>You’ll need a WebGL-capable web browser to see anything here;
             instructions can be found in this
@@ -52,9 +52,10 @@
             varying vec4 finalVertexColor;
             uniform mat4 projectionMatrix;
             uniform mat4 rotationMatrix;
+            uniform mat4 instanceMatrix;
 
             void main(void) {
-                gl_Position = projectionMatrix * rotationMatrix * vec4(vertexPosition, 1.0);
+                gl_Position = projectionMatrix * rotationMatrix * instanceMatrix * vec4(vertexPosition, 1.0);
                 finalVertexColor = vec4(vertexColor, 1.0);
             }
         </script>
@@ -76,6 +77,6 @@
         </script>
 
         <!-- This script sets up the specific scene for this page. -->
-        <script src="my_scene.js"></script>
+        <script src="hello-webgl-again.js"></script>
   </body>
 </html>
