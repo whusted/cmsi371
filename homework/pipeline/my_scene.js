@@ -127,10 +127,38 @@
     objectsToDraw = [
 
         {
+            color: { r: 0.7, g: 0.7, b: 0.8 },
+            angle: 0,
+            tx: -1,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES
+        },
+        {
             color: { r: 0.4, g: 0.7, b: 0.8 },
-            angle: 160,
-            vertices: Shapes.toRawLineArray(Shapes.cube()),
-            mode: gl.LINES
+            angle: 0,
+            ty: -0.75,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES
+        },
+        {
+            color: { r: 0.4, g: 0.7, b: 0.8 },
+            angle: 0,
+            ty: 0.75,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES
+        },
+        {
+            color: { r: 0.7, g: 0.7, b: 0.8 },
+            angle: 0,
+            tx: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES
+        },
+        {
+            color: { r: 0.4, g: 0.9, b: 0.8 },
+            angle: 0,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES
         }
     ];
 
