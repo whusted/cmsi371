@@ -149,14 +149,12 @@
         },
         {
             color: { r: 0.7, g: 0.7, b: 0.8 },
-            angle: 0,
             tx: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         },
         {
             color: { r: 0.4, g: 0.9, b: 0.8 },
-            angle: 0,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         }
@@ -239,14 +237,18 @@
         // Build our instance transformation matrix.
         var instanceMatrix = new Matrix4x4();
 
-        // Translate.
+        // Translate, scale, and rotate
         instanceMatrix = instanceMatrix.multiply(
-            Matrix4x4.getRotationMatrix(
-                object.angle || 1, object.rx || 1, object.ry || 1, object.rz || 1
+            Matrix4x4.getTranslationMatrix(
+                object.tx || 0, object.ty || 0, object.tz || 0
             ).multiply(
-                Matrix4x4.getTranslationMatrix(
-                    object.tx || 0, object.ty || 0, object.tz || 0
-            )
+                Matrix4x4.getScaleMatrix(
+                    object.sx || 1, object.sy || 1, object.sz || 1
+                ).multiply(
+                    Matrix4x4.getRotationMatrix(
+                        object.angle || 0, object.rx || 1, object.ry || 1, object.rz || 1
+                    )
+                )
             )
         );
 
