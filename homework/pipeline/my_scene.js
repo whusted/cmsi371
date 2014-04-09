@@ -128,28 +128,28 @@
 
         {
             color: { r: 0.7, g: 0.7, b: 0.8 },
-            angle: 0,
-            tx: -1,
+            // angle: 0,
+            // tx: -1,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         },
         {
             color: { r: 0.4, g: 0.7, b: 0.8 },
-            angle: 0,
-            ty: -0.75,
+            // angle: 0,
+            // ty: -0.75,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         },
         {
             color: { r: 0.4, g: 0.7, b: 0.8 },
-            angle: 0,
-            ty: 0.75,
+            // angle: 0,
+            // ty: 0.75,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         },
         {
             color: { r: 0.7, g: 0.7, b: 0.8 },
-            tx: 1,
+            // tx: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         },
@@ -218,11 +218,33 @@
     gl.enableVertexAttribArray(vertexColor);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
+    var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
+    var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+
 
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getOrthoMatrix(-1, 1, 1, -1, -1, 1).toDirectConsumption())
+        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 5, 5000).toDirectConsumption())
+    );
+
+    // Initialize scale matrix
+    gl.uniformMatrix4fv(scaleMatrix, 
+        gl.FALSE, 
+        new Float32Array(Matrix4x4.getScaleMatrix(1, 1, 1).toDirectConsumption())
+    );
+
+    // Initialize translation matrix
+    gl.uniformMatrix4fv(translationMatrix, 
+        gl.FALSE, 
+        new Float32Array(Matrix4x4.getTranslationMatrix(0, 0, 0).toDirectConsumption())
+    );
+
+    // Initialize camera matrix
+    gl.uniformMatrix4fv(cameraMatrix,
+        gl.FALSE,
+        new Float32Array(Matrix4x4.lookAt(0, 0, 5, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 

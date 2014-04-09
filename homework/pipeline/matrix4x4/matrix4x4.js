@@ -92,17 +92,16 @@ var Matrix4x4 = (function() {
             q = new Vector(qx, qy, qz),
             up = new Vector(upx, upy, upz);
 
-        var ze = p.subtract(q).unit();
-        var ye = up.subtract(up.projection(ze)).unit();
-        var xe = ye.cross(ze);
+        var ze = p.subtract(q).unit(),
+            ye = up.subtract(up.projection(ze)).unit(),
+            xe = ye.cross(ze);
 
-        return new matrix4x4(
+        return new Matrix4x4(
             xe.x(), xe.y(), xe.z(), -p.dot(xe),
             ye.x(), ye.y(), ye.z(), -p.dot(ye),
             ze.x(), ze.y(), ze.z(), -p.dot(ze),
             0, 0, 0, 1
         );
-
     
     };
 
