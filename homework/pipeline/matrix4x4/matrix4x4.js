@@ -87,6 +87,25 @@ var Matrix4x4 = (function() {
     	);
     };
 
+    matrix4x4.lookAt = function (px, py, pz, qx, qy, qz, upx, upy, upz) {
+        var p = new Vector(px, py, pz),
+            q = new Vector(qx, qy, qz),
+            up = new Vector(upx, upy, upz);
+
+        var ze = p.subtract(q).unit();
+        var ye = up.subtract(up.projection(ze)).unit();
+        var xe = ye.cross(ze);
+
+        return new matrix4x4(
+            xe.x(), xe.y(), xe.z(), -p.dot(xe),
+            ye.x(), ye.y(), ye.z(), -p.dot(ye),
+            ze.x(), ze.y(), ze.z(), -p.dot(ze),
+            0, 0, 0, 1
+        );
+
+    
+    };
+
     matrix4x4.getRotationMatrix = function (angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
