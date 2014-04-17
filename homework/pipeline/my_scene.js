@@ -126,35 +126,36 @@
     // Build the objects to display.
     objectsToDraw = [
 
-        {
-            color: { r: 0.7, g: 0.7, b: 0.8 },
-            // angle: 0,
-            // tx: -1,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        },
-        {
-            color: { r: 0.4, g: 0.7, b: 0.8 },
-            // angle: 0,
-            // ty: -0.75,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        },
-        {
-            color: { r: 0.4, g: 0.7, b: 0.8 },
-            // angle: 0,
-            // ty: 0.75,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        },
-        {
-            color: { r: 0.7, g: 0.7, b: 0.8 },
-            // tx: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        },
+        // {
+        //     color: { r: 0.7, g: 0.7, b: 0.8 },
+        //     // angle: 0,
+        //     // tx: -1,
+        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+        //     mode: gl.TRIANGLES
+        // },
+        // {
+        //     color: { r: 0.4, g: 0.7, b: 0.8 },
+        //     // angle: 0,
+        //     // ty: -0.75,
+        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+        //     mode: gl.TRIANGLES
+        // },
+        // {
+        //     color: { r: 0.4, g: 0.7, b: 0.8 },
+        //     // angle: 0,
+        //     // ty: 0.75,
+        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+        //     mode: gl.TRIANGLES
+        // },
+        // {
+        //     color: { r: 0.7, g: 0.7, b: 0.8 },
+        //     // tx: 1,
+        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+        //     mode: gl.TRIANGLES
+        // },
         {
             color: { r: 0.4, g: 0.9, b: 0.8 },
+            tz: -8,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         }
@@ -226,7 +227,7 @@
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 5, 5000).toDirectConsumption())
+        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, -5, 5000).toDirectConsumption())
     );
 
     // Initialize scale matrix
