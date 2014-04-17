@@ -245,7 +245,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(0, 0, 5, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(0, 0, 50, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
