@@ -252,21 +252,21 @@ $(function () {
         equal(m.elements[14], -1, "Fifteenth element by index");
         equal(m.elements[15], 0, "Sixteenth element by index");
 
-        m = Matrix4x4.getFrustumMatrix(2, -2, 2, -2, 2, -5000);
+        m = Matrix4x4.getFrustumMatrix(10, -20, 18, -200, -10, 2500);
 
         equal(m.dimensions(), 16, "Matrix size");
-        equal(m.elements[0], 1, "First element by index");
+        equal(m.elements[0], -0.6666666666666666, "First element by index");
         equal(m.elements[1], 0, "Second element by index");
-        equal(m.elements[2], 0, "Third element by index");
+        equal(m.elements[2], -0.3333333333333333, "Third element by index");
         equal(m.elements[3], 0, "Fourth element by index");
         equal(m.elements[4], 0, "Fifth element by index");
-        equal(m.elements[5], 1, "Sixth element by index");
-        equal(m.elements[6], 0, "Seventh element by index");
+        equal(m.elements[5], -0.09174311926605505, "Sixth element by index");
+        equal(m.elements[6], -0.8348623853211009, "Seventh element by index");
         equal(m.elements[7], 0, "Eighth element by index");
         equal(m.elements[8], 0, "Ninth element by index");
         equal(m.elements[9], 0, "Tenth element by index");
-        equal(m.elements[10], 0.9992003198720512, "Eleventh element by index");
-        equal(m.elements[11], -3.9984006397441023, "Twelfth element by index");
+        equal(m.elements[10], 0.9920318725099602, "Eleventh element by index");
+        equal(m.elements[11], 19.9203187250996, "Twelfth element by index");
         equal(m.elements[12], 0, "Thirteenth element by index");
         equal(m.elements[13], 0, "Fourteenth element by index");
         equal(m.elements[14], -1, "Fifteenth element by index");
