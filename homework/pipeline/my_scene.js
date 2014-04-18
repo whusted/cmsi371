@@ -26,6 +26,11 @@
         vertexPosition,
         vertexColor,
 
+        // Lighting variables
+        normalVector,
+        lightPosition,
+        lightDiffuse,
+
         // An individual "draw object" function.
         drawObject,
 
@@ -181,6 +186,9 @@
         }
         objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                 objectsToDraw[i].colors);
+        // normals buffer
+        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                objectsToDraw[i].normals);
     }
 
     // Initialize the shaders.
@@ -217,11 +225,17 @@
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
+    normalVector = gl.getAttribLocation(shaderProgram, "normalVector");
+    gl.enableVertexAttribArray(normalVector);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
     var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+    
+    // Lighting matrices initialized
+    lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
+    lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
 
 
     // Initialize projection matrix
@@ -281,6 +295,10 @@
             new Float32Array(instanceMatrix.toDirectConsumption())
         );
 
+        // Set the varying normal vectors.
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
+        gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
+
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
@@ -315,6 +333,10 @@
 
     // Draw the initial scene.
     drawScene();
+
+    // Set up our one light source and color.  Note the uniform3fv function.
+    gl.uniform3fv(lightPosition, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
 
     // Set up the rotation toggle: clicking on the canvas does it.
     $(canvas).click(function () {
