@@ -145,25 +145,19 @@
         //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
         //     mode: gl.TRIANGLES
         // },
-        // {
-        //     color: { r: 0.4, g: 0.7, b: 0.8 },
-        //     // angle: 0,
-        //     // ty: 0.75,
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-        //     mode: gl.TRIANGLES
-        // },
+        {
+            color: { r: 0.4, g: 0.7, b: 0.8 },
+            // angle: 0,
+            // ty: 0.75,
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
+            mode: gl.TRIANGLES
+        },
         // {
         //     color: { r: 0.7, g: 0.7, b: 0.8 },
         //     // tx: 1,
         //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
         //     mode: gl.TRIANGLES
-        // },
-        {
-            color: { r: 0.4, g: 0.9, b: 0.8 },
-            tz: -10,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
-        }
+        // }
     ];
 
     // Pass the vertices to WebGL.
@@ -285,7 +279,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(0, 0, 20, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
