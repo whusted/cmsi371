@@ -160,7 +160,7 @@
         // },
         {
             color: { r: 0.4, g: 0.9, b: 0.8 },
-            tz: -8,
+            tz: -10,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES
         }
@@ -187,8 +187,34 @@
         objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                 objectsToDraw[i].colors);
         // normals buffer
-        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].normals);
+        var numberOfTrianlges = objectsToDraw[i].vertices.length / 9;
+        var normals = [];
+
+        for (var j = 0; j < numberOfTrianlges; j++) {
+            var triangleBase = j * 9;
+            var v1 = new Vector(objectsToDraw[i].vertices[triangleBase],
+                                objectsToDraw[i].vertices[triangleBase + 1],
+                                objectsToDraw[i].vertices[triangleBase + 2]);
+
+            var v2 = new Vector(objectsToDraw[i].vertices[triangleBase + 3],
+                                objectsToDraw[i].vertices[triangleBase + 4],
+                                objectsToDraw[i].vertices[triangleBase + 5]);
+
+            var v3 = new Vector(objectsToDraw[i].vertices[triangleBase + 6],
+                                objectsToDraw[i].vertices[triangleBase + 7],
+                                objectsToDraw[i].vertices[triangleBase + 8]);
+            var vec1 = v2.subtract(v1);
+            var vec2 = v3.subtract(v1);
+            var normal = vec1.cross(vec2);
+
+            for (var k = 0; k < 3; k++) {
+                normals.push(normal.x());
+                normals.push(normal.y());
+                normals.push(normal.z());
+            }
+        }
+
+        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl, normals);
     }
 
     // Initialize the shaders.
@@ -247,7 +273,7 @@
     // Initialize scale matrix
     gl.uniformMatrix4fv(scaleMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getScaleMatrix(1, 1, 1).toDirectConsumption())
+        new Float32Array(Matrix4x4.getScaleMatrix(2, 2, 1).toDirectConsumption())
     );
 
     // Initialize translation matrix
@@ -259,7 +285,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(0, 0, 50, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(0, 0, 10, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
@@ -320,7 +346,7 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(getRotationMatrix(currentRotation, 1, 0, 0)));
+        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(getRotationMatrix(currentRotation, 0, 1, 0)));
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
