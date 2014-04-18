@@ -273,6 +273,49 @@ $(function () {
         equal(m.elements[15], 1, "Sixteenth element by index");
 
     });
+
+    test("Camera", function() {
+        var m = Matrix4x4.lookAt(0, 0, 50, 0, 0, 0, 0, 1, 0);
+
+        equal(m.dimensions(), 16, "Matrix size");
+        equal(m.elements[0], 1, "First element by index");
+        equal(m.elements[1], 0, "Second element by index");
+        equal(m.elements[2], 0, "Third element by index");
+        equal(m.elements[3], 0, "Fourth element by index");
+        equal(m.elements[4], 0, "Fifth element by index");
+        equal(m.elements[5], 1, "Sixth element by index");
+        equal(m.elements[6], 0, "Seventh element by index");
+        equal(m.elements[7], 0, "Eighth element by index");
+        equal(m.elements[8], 0, "Ninth element by index");
+        equal(m.elements[9], 0, "Tenth element by index");
+        equal(m.elements[10], 1, "Eleventh element by index");
+        equal(m.elements[11], -50, "Twelfth element by index");
+        equal(m.elements[12], 0, "Thirteenth element by index");
+        equal(m.elements[13], 0, "Fourteenth element by index");
+        equal(m.elements[14], 0, "Fifteenth element by index");
+        equal(m.elements[15], 1, "Sixteenth element by index");
+
+        m = Matrix4x4.lookAt(10, -10, 0, 20, 33, 10, 0, -1, 1);
+
+        equal(m.dimensions(), 16, "Matrix size");
+        equal(m.elements[0], 0.9661949778010385, "First element by index");
+        equal(m.elements[1], -0.1823009392077431, "Second element by index");
+        equal(m.elements[2], -0.18230093920774315, "Third element by index");
+        equal(m.elements[3], -11.484959170087816, "Fourth element by index");
+        equal(m.elements[4], 0.13290210718461187, "Fifth element by index");
+        equal(m.elements[5], -0.25372220462516804, "Sixth element by index");
+        equal(m.elements[6], 0.9581033727036108, "Seventh element by index");
+        equal(m.elements[7], -3.8662431180977994, "Eighth element by index");
+        equal(m.elements[8], -0.22091694090300196, "Ninth element by index");
+        equal(m.elements[9], -0.9499428458829083, "Tenth element by index");
+        equal(m.elements[10], -0.22091694090300196, "Eleventh element by index");
+        equal(m.elements[11], -7.290259049799063, "Twelfth element by index");
+        equal(m.elements[12], 0, "Thirteenth element by index");
+        equal(m.elements[13], 0, "Fourteenth element by index");
+        equal(m.elements[14], 0, "Fifteenth element by index");
+        equal(m.elements[15], 1, "Sixteenth element by index");
+
+    });
     
 
 });
