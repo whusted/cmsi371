@@ -150,7 +150,8 @@
             // angle: 0,
             // ty: 0.75,
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
-            mode: gl.TRIANGLES
+            mode: gl.TRIANGLES,
+            normals: Shapes.toNormalArray(Shapes.sphere(2, 32, 32))
         },
         // {
         //     color: { r: 0.7, g: 0.7, b: 0.8 },
@@ -181,34 +182,10 @@
         objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                 objectsToDraw[i].colors);
         // normals buffer
-        var numberOfTrianlges = objectsToDraw[i].vertices.length / 9;
-        var normals = [];
-
-        for (var j = 0; j < numberOfTrianlges; j++) {
-            var triangleBase = j * 9;
-            var v1 = new Vector(objectsToDraw[i].vertices[triangleBase],
-                                objectsToDraw[i].vertices[triangleBase + 1],
-                                objectsToDraw[i].vertices[triangleBase + 2]);
-
-            var v2 = new Vector(objectsToDraw[i].vertices[triangleBase + 3],
-                                objectsToDraw[i].vertices[triangleBase + 4],
-                                objectsToDraw[i].vertices[triangleBase + 5]);
-
-            var v3 = new Vector(objectsToDraw[i].vertices[triangleBase + 6],
-                                objectsToDraw[i].vertices[triangleBase + 7],
-                                objectsToDraw[i].vertices[triangleBase + 8]);
-            var vec1 = v2.subtract(v1);
-            var vec2 = v3.subtract(v1);
-            var normal = vec1.cross(vec2);
-
-            for (var k = 0; k < 3; k++) {
-                normals.push(normal.x());
-                normals.push(normal.y());
-                normals.push(normal.z());
-            }
-        }
-
-        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl, normals);
+        // One more buffer: normals.
+        console.log(objectsToDraw[i].normals);
+        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                objectsToDraw[i].normals);
     }
 
     // Initialize the shaders.
@@ -261,13 +238,13 @@
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, -5, 5000).toDirectConsumption())
+        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 15, 5000).toDirectConsumption())
     );
 
     // Initialize scale matrix
     gl.uniformMatrix4fv(scaleMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getScaleMatrix(2, 2, 1).toDirectConsumption())
+        new Float32Array(Matrix4x4.getScaleMatrix(1, 1, 1).toDirectConsumption())
     );
 
     // Initialize translation matrix
@@ -351,12 +328,12 @@
         gl.flush();
     };
 
-    // Draw the initial scene.
-    drawScene();
-
     // Set up our one light source and color.  Note the uniform3fv function.
     gl.uniform3fv(lightPosition, [1.0, 1.0, 1.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+
+    // Draw the initial scene.
+    drawScene();
 
     // Set up the rotation toggle: clicking on the canvas does it.
     $(canvas).click(function () {
