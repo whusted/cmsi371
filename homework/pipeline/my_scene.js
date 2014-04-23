@@ -151,7 +151,7 @@
             // ty: 0.75,
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
             mode: gl.TRIANGLES,
-            normals: Shapes.toNormalArray(Shapes.sphere(2, 32, 32))
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
         },
         // {
         //     color: { r: 0.7, g: 0.7, b: 0.8 },
@@ -329,7 +329,7 @@
     };
 
     // Set up our one light source and color.  Note the uniform3fv function.
-    gl.uniform3fv(lightPosition, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightPosition, [10.0, 10.0, 10.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
 
     // Draw the initial scene.
