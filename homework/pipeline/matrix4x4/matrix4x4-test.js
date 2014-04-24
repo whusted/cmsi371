@@ -245,7 +245,7 @@ $(function () {
         equal(m.elements[7], 0, "Eighth element by index");
         equal(m.elements[8], 0, "Ninth element by index");
         equal(m.elements[9], 0, "Tenth element by index");
-        equal(m.elements[10], 0.9992003198720512, "Eleventh element by index");
+        equal(m.elements[10], -0.9992003198720512, "Eleventh element by index");
         equal(m.elements[11], -3.9984006397441023, "Twelfth element by index");
         equal(m.elements[12], 0, "Thirteenth element by index");
         equal(m.elements[13], 0, "Fourteenth element by index");
@@ -265,7 +265,7 @@ $(function () {
         equal(m.elements[7], 0, "Eighth element by index");
         equal(m.elements[8], 0, "Ninth element by index");
         equal(m.elements[9], 0, "Tenth element by index");
-        equal(m.elements[10], 0.9920318725099602, "Eleventh element by index");
+        equal(m.elements[10], -0.9920318725099602, "Eleventh element by index");
         equal(m.elements[11], 19.9203187250996, "Twelfth element by index");
         equal(m.elements[12], 0, "Thirteenth element by index");
         equal(m.elements[13], 0, "Fourteenth element by index");
