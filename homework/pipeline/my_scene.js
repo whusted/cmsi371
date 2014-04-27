@@ -84,12 +84,13 @@
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
         },
-        // {
-        //     color: { r: 0.7, g: 0.7, b: 0.8 },
-        //     // tx: 1,
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-        //     mode: gl.TRIANGLES
-        // }
+        {
+            color: { r: 0.9, g: 0.7, b: 0.8 },
+            tz: 5,
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES,
+            normals: Shapes.toVertexNormalArray(Shapes.cube())
+        }
     ];
 
     // Pass the vertices to WebGL.
@@ -169,7 +170,7 @@
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 15, 5000).toDirectConsumption())
+        new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 20, 2000).toDirectConsumption())
     );
 
     // Initialize scale matrix
@@ -187,7 +188,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(0, 0, 20, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(12, 5, 35, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
