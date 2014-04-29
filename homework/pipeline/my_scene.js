@@ -19,10 +19,13 @@
         abort = false,
 
         // Important state variables.
+        cameraMatrix,
         currentRotation = 0.0,
         currentInterval,
         projectionMatrix,
         rotationMatrix,
+        scaleMatrix,
+        translationMatrix,
         vertexPosition,
         vertexColor,
 
@@ -61,25 +64,11 @@
 
     // Build the objects to display.
     objectsToDraw = [
-
-        // {
-        //     color: { r: 0.7, g: 0.7, b: 0.8 },
-        //     // angle: 0,
-        //     // tx: -1,
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-        //     mode: gl.TRIANGLES
-        // },
-        // {
-        //     color: { r: 0.4, g: 0.7, b: 0.8 },
-        //     // angle: 0,
-        //     // ty: -0.75,
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-        //     mode: gl.TRIANGLES
-        // },
         {
             color: { r: 0.4, g: 0.7, b: 0.8 },
-            // angle: 0,
-            // ty: 0.75,
+            sx: 1,
+            sy: 1,
+            sz: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
@@ -87,11 +76,17 @@
         {
             color: { r: 0.9, g: 0.7, b: 0.8 },
             tz: 5,
+            tx: -1,
+            sx: 1,
+            sy: 1,
+            sz: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.cube())
         }
     ];
+
+    var sphere = objectsToDraw[0];
 
     // Pass the vertices to WebGL.
     for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
@@ -158,9 +153,9 @@
     gl.enableVertexAttribArray(normalVector);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
-    var translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
-    var scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
-    var cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+    translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
+    scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
+    cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
     
     // Lighting matrices initialized
     lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
@@ -188,7 +183,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(12, 5, 35, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(0, 0, 35, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
@@ -267,19 +262,47 @@
     // Draw the initial scene.
     drawScene();
 
-    // Set up the rotation toggle: clicking on the canvas does it.
-    $(canvas).click(function () {
-        if (currentInterval) {
-            clearInterval(currentInterval);
-            currentInterval = null;
-        } else {
-            currentInterval = setInterval(function () {
-                currentRotation += 1.0;
-                drawScene();
-                if (currentRotation >= 360.0) {
-                    currentRotation -= 360.0;
-                }
-            }, 30);
+    // prevent arrow keys from moving entire page
+    window.addEventListener("keydown", function(e) {
+        if([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
+    }, false);
+
+    $('body').keydown(function(event) {
+        var actions = {
+            // Left arrow key
+            37: function () {
+                sphere.sx /= 1.1;
+                sphere.sy /= 1.1;
+                sphere.sz /= 1.1;
+            },
+            
+            // Up arrow key
+            38: function () {
+                sphere.sx *= 1.1;
+                sphere.sy *= 1.1;
+                sphere.sz *= 1.1;
+            },
+
+            // Right arrow key
+            39: function () {
+                sphere.sx *= 1.1;
+                sphere.sy *= 1.1;
+                sphere.sz *= 1.1;
+            },
+            // Down arrow key
+            40: function() {
+                sphere.sx /= 1.1;
+                sphere.sy /= 1.1;
+                sphere.sz /= 1.1;
+            }
+
+        };
+
+        if (actions[event.which]) {
+            actions[event.which]();
+            drawScene();
         }
     });
 
