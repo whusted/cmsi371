@@ -82,7 +82,20 @@
             sz: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.cube())
+            normals: Shapes.toVertexNormalArray(Shapes.cube()),
+            subobjects:
+                [
+                    {
+                        color: { r: 0.4, g: 0.7, b: 0.8 },
+                        sx: 1,
+                        sy: 1,
+                        sz: 1,
+                        tx: -1,
+                        vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
+                        mode: gl.TRIANGLES,
+                        normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
+                    },
+                ]
         }
     ];
 
@@ -110,7 +123,6 @@
                 objectsToDraw[i].colors);
         // normals buffer
         // One more buffer: normals.
-        console.log(objectsToDraw[i].normals);
         objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
                 objectsToDraw[i].normals);
     }
@@ -229,8 +241,12 @@
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         // Recrusively draw subobjects/children of objects, if they exist
-        if (object[i].subobjects && object[i].subobjects.length > 0) {
-                drawObject(subobjects[i]);
+        if (object.subobjects) {
+            console.log(object.subobjects.length);
+        }
+        if (object.subobjects && object.subobjects.length > 0) {
+            for (var j = 0; j < object.subobjects.length; j++) {
+                drawObject(object.subobjects[j]);
             }
         }
     };
