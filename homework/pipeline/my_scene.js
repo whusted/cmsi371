@@ -70,12 +70,14 @@
     objectsToDraw = [
         {
             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            tx: randomNumber(1),
+            ty: randomNumber(1),
             sx: 1,
             sy: 1,
             sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
             mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
         },
         {
             color: { r: 0.9, g: 0.7, b: 0.8 },

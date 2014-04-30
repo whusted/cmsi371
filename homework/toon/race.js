@@ -138,8 +138,7 @@ $(function () {
                     {
                         frame: 110,
                         tx: 1000,
-                        ty: 10,
-                        bobLevel: 0.5 // JD: I suspect you aren't using this.
+                        ty: 10
                     },
 
                     {
@@ -255,7 +254,7 @@ $(function () {
                         ty: 5
                     }
 
-             ] // JD: Out-of-place indent here.
+                ]
             }
         ];
 
