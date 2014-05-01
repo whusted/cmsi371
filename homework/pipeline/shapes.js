@@ -104,7 +104,9 @@ var Shapes = {
         var vertices = [],
            indices = [];
 
+        // JD: Your indentation switched to 2-space indents here?
       vertices.push([0.0, 0.5, 0.0]);
+      // JD: Oops, missed a space---------------------------------------v
       for (var theta = 0; theta < (Math.PI * 2); theta += (Math.PI / 4)){
         vertices.push([0.5 * Math.cos(theta), 0.0, 0.5 * Math.sin(theta)])
       }
@@ -127,6 +129,7 @@ var Shapes = {
     },
 
     sphere: function (radius, latitudeBelts, longitudeBelts) {
+        // JD: And now you're back on 4-space indents.  Hiccup?
         var vertices = [],
             indices = [];
 

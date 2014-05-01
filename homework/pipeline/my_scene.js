@@ -89,6 +89,7 @@
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.cube()),
+            // JD: Attempted subobject noted...
             subobjects:
                 [
                     {
@@ -250,11 +251,16 @@
         if (object.subobjects) {
             console.log(object.subobjects.length);
         }
+        // JD: This part looks good, without the inherited instance matrix.
         if (object.subobjects && object.subobjects.length > 0) {
             for (var j = 0; j < object.subobjects.length; j++) {
                 drawObject(object.subobjects[j]);
             }
         }
+ 
+        // JD: ...But you're missing something.  Stare at that console warning for a bit
+        //     and see if you can track it down.  Hint: *Take a really close look at what
+        //     is being sent to WebGL, and note where it came from.*
     };
 
     /*
