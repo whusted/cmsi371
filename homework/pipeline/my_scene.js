@@ -62,9 +62,14 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-
-    randomNumber = function(n) {
-        return Math.random(n);
+    // Return a random number
+    randomNumber = function(m, n) {
+        if (m && n) {
+            return Math.random() * n - m;
+        } else {
+            return Math.random();
+        }
+        
     };
     // Build the objects to display.
     objectsToDraw = [
