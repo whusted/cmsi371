@@ -89,7 +89,7 @@
         {
             color: { r: 0.9, g: 0.7, b: 0.8 },
             tz: 5,
-            tx: -1,
+            tx: -2,
             sx: 1,
             sy: 1,
             sz: 1,
@@ -260,7 +260,7 @@
             if (objectsToDraw[i].subobjects) {
                 drawObject(objectsToDraw[i].subobjects, instanceMatrix);
             }
-        }
+        };
     };
 
     /*
