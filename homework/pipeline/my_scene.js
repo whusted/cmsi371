@@ -97,16 +97,13 @@
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.cube()),
             subobjects: [
-                    {
-                        color: { r: 0.4, g: 0.7, b: 0.8 },
-                        sx: 1,
-                        sy: 1,
-                        sz: 1,
-                        tx: -1,
-                        vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
-                        mode: gl.TRIANGLES,
-                        normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
-                    },
+                {
+                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                    tz: -1,
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
+                    mode: gl.TRIANGLES,
+                    normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
+                },
             ]
         }
     ];
@@ -221,14 +218,14 @@
     /*
      * Displays an individual object.
      */
-    drawObject = function (objectsToDraw) {
+    drawObject = function (objectsToDraw, inheritedInstance) {
         for (var i = 0; i < objectsToDraw.length; i++) {
             // Set the varying colors.
             gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].colorBuffer);
             gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
             // Build our instance transformation matrix.
-            var instanceMatrix = new Matrix4x4();
+            var instanceMatrix = inheritedInstance || new Matrix4x4();
 
             // Translate, scale, and rotate
             instanceMatrix = instanceMatrix.multiply(
@@ -261,7 +258,7 @@
             gl.drawArrays(objectsToDraw[i].mode, 0, objectsToDraw[i].vertices.length / 3);
             
             if (objectsToDraw[i].subobjects) {
-                drawObject(objectsToDraw[i].subobjects);
+                drawObject(objectsToDraw[i].subobjects, instanceMatrix);
             }
         }
     };
