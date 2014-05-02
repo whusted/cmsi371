@@ -34,6 +34,8 @@
         lightPosition,
         lightDiffuse,
 
+        verticesPasser,
+
         // An individual "draw object" function.
         drawObject,
 
@@ -65,7 +67,7 @@
     // Return a random number
     randomNumber = function(m, n) {
         if (m && n) {
-            return Math.random() * n - m;
+            return (Math.random() * n) - m;
         } else {
             return Math.random();
         }
@@ -94,49 +96,55 @@
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.cube()),
-            subobjects:
-                [
+            subobjects: [
                     {
                         color: { r: 0.4, g: 0.7, b: 0.8 },
                         sx: 1,
                         sy: 1,
                         sz: 1,
                         tx: -1,
-                        vertices: Shapes.toRawTriangleArray(Shapes.sphere(2, 32, 32)),
+                        vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
                         mode: gl.TRIANGLES,
-                        normals: Shapes.toVertexNormalArray(Shapes.sphere(2, 32, 32))
+                        normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
                     },
-                ]
+            ]
         }
     ];
 
     var sphere = objectsToDraw[0];
 
     // Pass the vertices to WebGL.
-    for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-        objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].vertices);
+    verticesPasser = function (objectsToDraw) {
+        for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
+            objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectsToDraw[i].vertices);
 
-        if (!objectsToDraw[i].colors) {
-            // If we have a single color, we expand that into an array
-            // of the same color over and over.
-            objectsToDraw[i].colors = [];
-            for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
-                    j < maxj; j += 1) {
-                objectsToDraw[i].colors = objectsToDraw[i].colors.concat(
-                    objectsToDraw[i].color.r,
-                    objectsToDraw[i].color.g,
-                    objectsToDraw[i].color.b
-                );
+            if (!objectsToDraw[i].colors) {
+                // If we have a single color, we expand that into an array
+                // of the same color over and over.
+                objectsToDraw[i].colors = [];
+                for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
+                        j < maxj; j += 1) {
+                    objectsToDraw[i].colors = objectsToDraw[i].colors.concat(
+                        objectsToDraw[i].color.r,
+                        objectsToDraw[i].color.g,
+                        objectsToDraw[i].color.b
+                    );
+                }
             }
+            objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectsToDraw[i].colors);
+            // normals buffer
+            // One more buffer: normals.
+            objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectsToDraw[i].normals);
+
+            if (objectsToDraw[i].subobjects && (objectsToDraw[i].subobjects.length != 0)) {
+                verticesPasser(objectsToDraw[i].subobjects);
+            }
+
         }
-        objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].colors);
-        // normals buffer
-        // One more buffer: normals.
-        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].normals);
-    }
+    },
 
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
@@ -213,51 +221,47 @@
     /*
      * Displays an individual object.
      */
-    drawObject = function (object) {
-        // Set the varying colors.
-        gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+    drawObject = function (objectsToDraw) {
+        for (var i = 0; i < objectsToDraw.length; i++) {
+            // Set the varying colors.
+            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].colorBuffer);
+            gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
-        // Build our instance transformation matrix.
-        var instanceMatrix = new Matrix4x4();
+            // Build our instance transformation matrix.
+            var instanceMatrix = new Matrix4x4();
 
-        // Translate, scale, and rotate
-        instanceMatrix = instanceMatrix.multiply(
-            Matrix4x4.getTranslationMatrix(
-                object.tx || 0, object.ty || 0, object.tz || 0
-            ).multiply(
-                Matrix4x4.getScaleMatrix(
-                    object.sx || 1, object.sy || 1, object.sz || 1
+            // Translate, scale, and rotate
+            instanceMatrix = instanceMatrix.multiply(
+                Matrix4x4.getTranslationMatrix(
+                    objectsToDraw[i].tx || 0, objectsToDraw[i].ty || 0, objectsToDraw[i].tz || 0
                 ).multiply(
-                    Matrix4x4.getRotationMatrix(
-                        object.angle || 0, object.rx || 1, object.ry || 1, object.rz || 1
+                    Matrix4x4.getScaleMatrix(
+                        objectsToDraw[i].sx || 1, objectsToDraw[i].sy || 1, objectsToDraw[i].sz || 1
+                    ).multiply(
+                        Matrix4x4.getRotationMatrix(
+                            objectsToDraw[i].angle || 0, objectsToDraw[i].rx || 1, objectsToDraw[i].ry || 1, objectsToDraw[i].rz || 1
+                        )
                     )
                 )
-            )
-        );
+            );
 
-        // Set it.
-        gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
-            gl.FALSE,
-            new Float32Array(instanceMatrix.toDirectConsumption())
-        );
+            // Set it.
+            gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
+                gl.FALSE,
+                new Float32Array(instanceMatrix.toDirectConsumption())
+            );
 
-        // Set the varying normal vectors.
-        gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
-        gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
+            // Set the varying normal vectors.
+            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].normalBuffer);
+            gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
 
-        // Set the varying vertex coordinates.
-        gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
-        gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        gl.drawArrays(object.mode, 0, object.vertices.length / 3);
-
-        // Recrusively draw subobjects/children of objects, if they exist
-        if (object.subobjects) {
-            console.log(object.subobjects.length);
-        }
-        if (object.subobjects && object.subobjects.length > 0) {
-            for (var j = 0; j < object.subobjects.length; j++) {
-                drawObject(object.subobjects[j]);
+            // Set the varying vertex coordinates.
+            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].buffer);
+            gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
+            gl.drawArrays(objectsToDraw[i].mode, 0, objectsToDraw[i].vertices.length / 3);
+            
+            if (objectsToDraw[i].subobjects) {
+                drawObject(objectsToDraw[i].subobjects);
             }
         }
     };
@@ -272,14 +276,15 @@
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).toDirectConsumption()));
 
-        // Display the objects.
-        for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-            drawObject(objectsToDraw[i]);
-        }
+        // Display the objects
+        drawObject(objectsToDraw);
+
 
         // All done.
         gl.flush();
     };
+
+    verticesPasser(objectsToDraw);
 
     // Set up our one light source and color.  Note the uniform3fv function.
     gl.uniform3fv(lightPosition, [10.0, 10.0, 10.0]);
