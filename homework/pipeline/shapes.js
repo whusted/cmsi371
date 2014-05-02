@@ -105,25 +105,26 @@ var Shapes = {
            indices = [];
 
         // JD: Your indentation switched to 2-space indents here?
-      vertices.push([0.0, 0.5, 0.0]);
-      // JD: Oops, missed a space---------------------------------------v
-      for (var theta = 0; theta < (Math.PI * 2); theta += (Math.PI / 4)){
-        vertices.push([0.5 * Math.cos(theta), 0.0, 0.5 * Math.sin(theta)])
-      }
+        // Fixed indents
+        vertices.push([0.0, 0.5, 0.0]);
+        // JD: Oops, missed a space---------------------------------------v
+        for (var theta = 0; theta < (Math.PI * 2); theta += (Math.PI / 4)) {
+            vertices.push([0.5 * Math.cos(theta), 0.0, 0.5 * Math.sin(theta)])
+        }
 
-      for (var i = 1; i <= 8; i += 1) {
-        indices.push([0, i, (i === 8) ? 1 : (i + 1)]);
-      }
+        for (var i = 1; i <= 8; i += 1) {
+            indices.push([0, i, (i === 8) ? 1 : (i + 1)]);
+        }
 
-      for (var i = 1; i <= 7; i += 1) {
-        indices.push([8, i, (i === 7) ? 1 : (i + 1)]);
-      }
+        for (var i = 1; i <= 7; i += 1) {
+            indices.push([8, i, (i === 7) ? 1 : (i + 1)]);
+        }
 
 
-      return {
-        vertices: vertices,
-        indices: indices
-      }
+        return {
+            vertices: vertices,
+            indices: indices
+        }
 
 
     },
