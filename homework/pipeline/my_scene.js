@@ -90,6 +90,7 @@
             color: { r: 0.9, g: 0.7, b: 0.8 },
             tz: 5,
             tx: -2,
+            angle: 45,
             sx: 1,
             sy: 1,
             sz: 1,
@@ -100,12 +101,34 @@
                 {
                     color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
                     tz: -1,
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(.5, 32, 32)),
                     mode: gl.TRIANGLES,
-                    normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
-                },
+                    normals: Shapes.toVertexNormalArray(Shapes.sphere(.5, 32, 32)),
+                    subobjects: [
+                        {
+                            id: 1001,
+                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                            tz: -.5,
+                            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.75, 32, 32)),
+                            mode: gl.TRIANGLES,
+                            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.75, 32, 32))
+                        }
+                    ]
+                }, 
             ]
+        },
+        {
+            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            tx: randomNumber(1),
+            ty: randomNumber(1),
+            sx: 1,
+            sy: 1,
+            sz: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
+            mode: gl.TRIANGLES,
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
         }
+
     ];
 
     var sphere = objectsToDraw[0];
@@ -135,7 +158,7 @@
             // One more buffer: normals.
             objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].normals);
-
+            
             if (objectsToDraw[i].subobjects && (objectsToDraw[i].subobjects.length != 0)) {
                 verticesPasser(objectsToDraw[i].subobjects);
             }
