@@ -73,63 +73,27 @@
         }
         
     };
-    // Build the objects to display.
-    objectsToDraw = [
-        {
-            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
-            tx: randomNumber(1),
-            ty: randomNumber(1),
-            sx: 1,
-            sy: 1,
-            sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
-            mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
-        },
-        {
-            color: { r: 0.9, g: 0.7, b: 0.8 },
-            tz: 5,
-            tx: -2,
-            angle: 45,
-            sx: 1,
-            sy: 1,
-            sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.cube()),
-            subobjects: [
-                {
-                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
-                    tz: -1,
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(.5, 32, 32)),
-                    mode: gl.TRIANGLES,
-                    normals: Shapes.toVertexNormalArray(Shapes.sphere(.5, 32, 32)),
-                    subobjects: [
-                        {
-                            id: 1001,
-                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
-                            tz: -.5,
-                            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.75, 32, 32)),
-                            mode: gl.TRIANGLES,
-                            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.75, 32, 32))
-                        }
-                    ]
-                }, 
-            ]
-        },
-        {
-            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
-            tx: randomNumber(1),
-            ty: randomNumber(1),
-            sx: 1,
-            sy: 1,
-            sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
-            mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32))
-        }
 
-    ];
+    randomSphere = function() {
+        return {
+            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            tx: randomNumber(1, 9),
+            ty: randomNumber(1, 3),
+            tz: randomNumber(1, 2),
+            sx: 1,
+            sy: 1,
+            sz: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5, 32, 32)),
+            mode: gl.TRIANGLES,
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.5, 32, 32))
+        }
+    };
+    // Build the objects to display.
+    objectsToDraw = [];
+    
+    for (var i = 0; i < 10; i++) {
+        objectsToDraw.push(randomSphere());
+    }
 
     var sphere = objectsToDraw[0];
 
@@ -242,6 +206,7 @@
      * Displays an individual object.
      */
     drawObject = function (objectsToDraw, inheritedInstance) {
+        
         for (var i = 0; i < objectsToDraw.length; i++) {
             // Set the varying colors.
             gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].colorBuffer);
@@ -264,7 +229,6 @@
                     )
                 )
             );
-
             // Set it.
             gl.uniformMatrix4fv(gl.getUniformLocation(shaderProgram, "instanceMatrix"),
                 gl.FALSE,
@@ -283,7 +247,9 @@
             if (objectsToDraw[i].subobjects) {
                 drawObject(objectsToDraw[i].subobjects, instanceMatrix);
             }
-        };
+        }
+        
+
     };
 
     /*
@@ -311,7 +277,7 @@
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
 
     // Draw the initial scene.
-    drawScene();
+    //drawScene();
 
     // prevent arrow keys from moving entire page
     window.addEventListener("keydown", function(e) {
@@ -319,6 +285,13 @@
             e.preventDefault();
         }
     }, false);
+
+    $('body').click(function(event) {
+        drawScene();
+
+        console.log(event.pageX);
+        console.log(event.pageY);
+    })
 
     $('body').keydown(function(event) {
         var actions = {
