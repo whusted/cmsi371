@@ -89,11 +89,88 @@
         }
     };
     // Build the objects to display.
-    objectsToDraw = [];
-    
-    for (var i = 0; i < 10; i++) {
-        objectsToDraw.push(randomSphere());
-    }
+    objectsToDraw = [
+        {
+            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            tx: 0,
+            ty: 0,
+            tz: 0,
+            sx: 1,
+            sy: 1,
+            sz: 1,
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(20, 32, 32)),
+            mode: gl.TRIANGLES,
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(20, 32, 32)),
+            subobjects: [
+               {
+                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                    sx: 1,
+                    sy: 1,
+                    sz: 1,
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
+                    mode: gl.TRIANGLES,
+                    normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32)),
+                    subobjects: [
+                        {
+                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                            sx: 0.1,
+                            sy: 0.1,
+                            sz: 0.1,
+                            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.1, 32, 32)),
+                            mode: gl.TRIANGLES,
+                            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.1, 32, 32)),
+                            subobjects: [
+                                {
+                                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                    sx: 0.1,
+                                    sy: 0.1,
+                                    sz: 0.1,
+                                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.01, 32, 32)),
+                                    mode: gl.TRIANGLES,
+                                    normals: Shapes.toVertexNormalArray(Shapes.sphere(0.01, 32, 32)),
+                                    subobjects: [
+                                        {
+                                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                            sx: 0.1,
+                                            sy: 0.1,
+                                            sz: 0.1,
+                                            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.001, 32, 32)),
+                                            mode: gl.TRIANGLES,
+                                            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.001, 32, 32)),
+                                            subobjects: [
+                                                {
+                                                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                    sx: 0.1,
+                                                    sy: 0.1,
+                                                    sz: 0.1,
+                                                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.0001, 32, 32)),
+                                                    mode: gl.TRIANGLES,
+                                                    normals: Shapes.toVertexNormalArray(Shapes.sphere(0.0001, 32, 32)),
+                                                    subobjects: [
+                                                        {
+                                                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                            sx: 0.1,
+                                                            sy: 0.1,
+                                                            sz: 0.1,
+                                                            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.00001, 32, 32)),
+                                                            mode: gl.TRIANGLES,
+                                                            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.00001, 32, 32)),
+
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+    ];
 
     var sphere = objectsToDraw[0];
 
@@ -186,7 +263,7 @@
     // Initialize scale matrix
     gl.uniformMatrix4fv(scaleMatrix, 
         gl.FALSE, 
-        new Float32Array(Matrix4x4.getScaleMatrix(1, 1, 1).toDirectConsumption())
+        new Float32Array(Matrix4x4.getScaleMatrix(0.25, 0.25, 0.25).toDirectConsumption())
     );
 
     // Initialize translation matrix
@@ -198,7 +275,7 @@
     // Initialize camera matrix
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
-        new Float32Array(Matrix4x4.lookAt(0, 0, 35, 0, 0, 0, 0, 1, 0).toDirectConsumption())
+        new Float32Array(Matrix4x4.lookAt(0, 0, 100, 0, 0, 0, 0, 1, 0).toDirectConsumption())
     );
 
 
@@ -273,11 +350,11 @@
     verticesPasser(objectsToDraw);
 
     // Set up our one light source and color.  Note the uniform3fv function.
-    gl.uniform3fv(lightPosition, [10.0, 10.0, 10.0]);
+    gl.uniform3fv(lightPosition, [30.0, 20.0, 90.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
 
     // Draw the initial scene.
-    //drawScene();
+    drawScene();
 
     // prevent arrow keys from moving entire page
     window.addEventListener("keydown", function(e) {
@@ -286,12 +363,17 @@
         }
     }, false);
 
-    $('body').click(function(event) {
-        drawScene();
+    $(canvas).mousemove(function (event) {
+        // Compute the individual rotations.
+        var rotationAboutY = Matrix4x4.getRotationMatrix(event.pageX, 0, 1, 0),
+            rotationAboutX = Matrix4x4.getRotationMatrix(event.pageY, 1, 0, 0),
+            finalRotation = rotationAboutX.multiply(rotationAboutY);
 
-        console.log(event.pageX);
-        console.log(event.pageY);
-    })
+        // Set up the rotation matrix.
+        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(finalRotation.toDirectConsumption()));
+
+        drawScene();
+    });
 
     $('body').keydown(function(event) {
         var actions = {
@@ -304,9 +386,9 @@
             
             // Up arrow key
             38: function () {
-                sphere.sx *= 1.1;
-                sphere.sy *= 1.1;
-                sphere.sz *= 1.1;
+                sphere.sx *= 1.2;
+                sphere.sy *= 1.2;
+                sphere.sz *= 1.2;
             },
 
             // Right arrow key
@@ -317,9 +399,9 @@
             },
             // Down arrow key
             40: function() {
-                sphere.sx /= 1.1;
-                sphere.sy /= 1.1;
-                sphere.sz /= 1.1;
+                sphere.sx /= 1.2;
+                sphere.sy /= 1.2;
+                sphere.sz /= 1.2;
             }
 
         };
