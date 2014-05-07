@@ -364,14 +364,15 @@
     }, false);
 
     $(canvas).mousemove(function (event) {
-        // Compute the individual rotations.
-        var rotationAboutY = Matrix4x4.getRotationMatrix(event.pageX, 0, 1, 0),
-            rotationAboutX = Matrix4x4.getRotationMatrix(event.pageY, 1, 0, 0),
-            finalRotation = rotationAboutX.multiply(rotationAboutY);
+        var xLight,
+            yLight;
 
-        // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(finalRotation.toDirectConsumption()));
-
+        // 612 and 416 is roughly middle of canvas
+        xLight = event.pageX > 612 ? -(event.pageX / 12) : event.pageX / 12;
+        yLight = event.pageY > 416 ? -(event.pageY / 12) : event.pageY / 12;
+        
+        gl.uniform3fv(lightPosition, [xLight, yLight, 90.0]);
+        gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
         drawScene();
     });
 
