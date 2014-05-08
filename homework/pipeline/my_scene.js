@@ -27,12 +27,15 @@
         scaleMatrix,
         translationMatrix,
         vertexPosition,
-        vertexColor,
+        vertexSpecularColor,
+        shininess,
+        vertexDiffuseColor,
 
         // Lighting variables
         normalVector,
         lightPosition,
         lightDiffuse,
+        lightSpecular,
 
         verticesPasser,
 
@@ -92,6 +95,8 @@
     objectsToDraw = [
         {
             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
             tx: 0,
             ty: 0,
             tz: 0,
@@ -104,6 +109,8 @@
             subobjects: [
                {
                     color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
                     sx: 1,
                     sy: 1,
                     sz: 1,
@@ -113,6 +120,8 @@
                     subobjects: [
                         {
                             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
                             sx: 0.1,
                             sy: 0.1,
                             sz: 0.1,
@@ -122,6 +131,8 @@
                             subobjects: [
                                 {
                                     color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                                    shininess: 16,
                                     sx: 0.1,
                                     sy: 0.1,
                                     sz: 0.1,
@@ -131,6 +142,8 @@
                                     subobjects: [
                                         {
                                             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                                            shininess: 16,
                                             sx: 0.1,
                                             sy: 0.1,
                                             sz: 0.1,
@@ -140,6 +153,8 @@
                                             subobjects: [
                                                 {
                                                     color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                                                    shininess: 16,
                                                     sx: 0.1,
                                                     sy: 0.1,
                                                     sz: 0.1,
@@ -149,6 +164,8 @@
                                                     subobjects: [
                                                         {
                                                             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                                                            shininess: 16,
                                                             sx: 0.1,
                                                             sy: 0.1,
                                                             sz: 0.1,
@@ -193,17 +210,33 @@
                     );
                 }
             }
+
+            if (!objectsToDraw[i].specularColors) {
+            // Future refactor: helper function to convert a single value or
+            // array into an array of copies of itself.
+            objectsToDraw[i].specularColors = [];
+                for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
+                        j < maxj; j += 1) {
+                    objectsToDraw[i].specularColors = objectsToDraw[i].specularColors.concat(
+                        objectsToDraw[i].specularColor.r,
+                        objectsToDraw[i].specularColor.g,
+                        objectsToDraw[i].specularColor.b
+                    );
+                }
+            }
+            objectsToDraw[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
+                objectsToDraw[i].specularColors);
+
             objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].colors);
+
             // normals buffer
-            // One more buffer: normals.
             objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectsToDraw[i].normals);
             
             if (objectsToDraw[i].subobjects && (objectsToDraw[i].subobjects.length != 0)) {
                 verticesPasser(objectsToDraw[i].subobjects);
             }
-
         }
     },
 
@@ -239,10 +272,13 @@
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
     gl.enableVertexAttribArray(vertexPosition);
-    vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-    gl.enableVertexAttribArray(vertexColor);
+    vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
+    gl.enableVertexAttribArray(vertexDiffuseColor);
+    vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
+    gl.enableVertexAttribArray(vertexSpecularColor);
     normalVector = gl.getAttribLocation(shaderProgram, "normalVector");
     gl.enableVertexAttribArray(normalVector);
+
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     translationMatrix = gl.getUniformLocation(shaderProgram, "translationMatrix");
@@ -252,6 +288,8 @@
     // Lighting matrices initialized
     lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
     lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
+    lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
+    shininess = gl.getUniformLocation(shaderProgram, "shininess");
 
 
     // Initialize projection matrix
@@ -287,7 +325,14 @@
         for (var i = 0; i < objectsToDraw.length; i++) {
             // Set the varying colors.
             gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].colorBuffer);
-            gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+            gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].specularBuffer);
+            gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].normalBuffer);
+            gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
+
+            // Set the shininess.
+            gl.uniform1f(shininess, objectsToDraw[i].shininess);
 
             // Build our instance transformation matrix.
             var instanceMatrix = inheritedInstance || new Matrix4x4();
@@ -313,8 +358,7 @@
             );
 
             // Set the varying normal vectors.
-            gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].normalBuffer);
-            gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
+           
 
             // Set the varying vertex coordinates.
             gl.bindBuffer(gl.ARRAY_BUFFER, objectsToDraw[i].buffer);
@@ -352,6 +396,7 @@
     // Set up our one light source and color.  Note the uniform3fv function.
     gl.uniform3fv(lightPosition, [30.0, 20.0, 90.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
     // Draw the initial scene.
     drawScene();
