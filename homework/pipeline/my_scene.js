@@ -79,17 +79,17 @@
             sx: 1,
             sy: 1,
             sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(20, 32, 32)),
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(10, 32, 32)),
             mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.sphere(20, 32, 32)),
+            normals: Shapes.toVertexNormalArray(Shapes.sphere(10, 32, 32)),
             subobjects: [
                {
                     color: { r: Math.random(), g: Math.random(), b: Math.random() },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                     shininess: 16,
-                    sx: 1,
-                    sy: 1,
-                    sz: 1,
+                    sx: 0.1,
+                    sy: 0.1,
+                    sz: 0.1,
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere(1, 32, 32)),
                     mode: gl.TRIANGLES,
                     normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32)),
@@ -345,7 +345,6 @@
                 drawObject(objectsToDraw[i].subobjects, instanceMatrix);
             }
         }
-        
 
     };
 
@@ -361,7 +360,6 @@
 
         // Display the objects
         drawObject(objectsToDraw);
-
 
         // All done.
         gl.flush();
@@ -399,25 +397,18 @@
 
     $('body').keydown(function(event) {
         var actions = {
-            // Left arrow key
-            37: function () {
-                sphere.sx /= 1.1;
-                sphere.sy /= 1.1;
-                sphere.sz /= 1.1;
-            },
             
             // Up arrow key
             38: function () {
+                // console.log("sx " + sphere.sx);
                 sphere.sx *= 1.2;
                 sphere.sy *= 1.2;
                 sphere.sz *= 1.2;
-            },
-
-            // Right arrow key
-            39: function () {
-                sphere.sx *= 1.1;
-                sphere.sy *= 1.1;
-                sphere.sz *= 1.1;
+                if (sphere.sx >= 34673132095468.547) {
+                    sphere.sx = 0.33;
+                    sphere.sy = 0.33;
+                    sphere.sz = 0.33;
+                }
             },
             // Down arrow key
             40: function() {
