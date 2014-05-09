@@ -67,34 +67,10 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    // Return a random number
-    randomNumber = function(m, n) {
-        if (m && n) {
-            return (Math.random() * n) - m;
-        } else {
-            return Math.random();
-        }
-        
-    };
-
-    randomSphere = function() {
-        return {
-            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
-            tx: randomNumber(1, 9),
-            ty: randomNumber(1, 3),
-            tz: randomNumber(1, 2),
-            sx: 1,
-            sy: 1,
-            sz: 1,
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5, 32, 32)),
-            mode: gl.TRIANGLES,
-            normals: Shapes.toVertexNormalArray(Shapes.sphere(0.5, 32, 32))
-        }
-    };
     // Build the objects to display.
     objectsToDraw = [
         {
-            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+            color: { r: Math.random(), g: Math.random(), b: Math.random() },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
             shininess: 8,
             tx: 0,
@@ -108,7 +84,7 @@
             normals: Shapes.toVertexNormalArray(Shapes.sphere(20, 32, 32)),
             subobjects: [
                {
-                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                    color: { r: Math.random(), g: Math.random(), b: Math.random() },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                     shininess: 16,
                     sx: 1,
@@ -119,7 +95,7 @@
                     normals: Shapes.toVertexNormalArray(Shapes.sphere(1, 32, 32)),
                     subobjects: [
                         {
-                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                            color: { r: Math.random(), g: Math.random(), b: Math.random() },
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                             shininess: 16,
                             sx: 0.1,
@@ -130,7 +106,7 @@
                             normals: Shapes.toVertexNormalArray(Shapes.sphere(0.1, 32, 32)),
                             subobjects: [
                                 {
-                                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                    color: { r: Math.random(), g: Math.random(), b: Math.random() },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                                     shininess: 16,
                                     sx: 0.1,
@@ -141,7 +117,7 @@
                                     normals: Shapes.toVertexNormalArray(Shapes.sphere(0.01, 32, 32)),
                                     subobjects: [
                                         {
-                                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                            color: { r: Math.random(), g: Math.random(), b: Math.random() },
                                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                                             shininess: 16,
                                             sx: 0.1,
@@ -152,7 +128,7 @@
                                             normals: Shapes.toVertexNormalArray(Shapes.sphere(0.001, 32, 32)),
                                             subobjects: [
                                                 {
-                                                    color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                    color: { r: Math.random(), g: Math.random(), b: Math.random() },
                                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                                                     shininess: 16,
                                                     sx: 0.1,
@@ -163,7 +139,7 @@
                                                     normals: Shapes.toVertexNormalArray(Shapes.sphere(0.0001, 32, 32)),
                                                     subobjects: [
                                                         {
-                                                            color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
+                                                            color: { r: Math.random(), g: Math.random(), b: Math.random() },
                                                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
                                                             shininess: 16,
                                                             sx: 0.1,
