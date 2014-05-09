@@ -400,11 +400,10 @@
             
             // Up arrow key
             38: function () {
-                // console.log("sx " + sphere.sx);
                 sphere.sx *= 1.2;
                 sphere.sy *= 1.2;
                 sphere.sz *= 1.2;
-                if (sphere.sx >= 34673132095468.547) {
+                if (sphere.sx >= 34166027830095.31) {
                     sphere.sx = 0.33;
                     sphere.sy = 0.33;
                     sphere.sz = 0.33;
