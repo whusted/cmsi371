@@ -96,7 +96,7 @@
         {
             color: { r: randomNumber(1), g: randomNumber(1), b: randomNumber(1) },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            shininess: 8,
             tx: 0,
             ty: 0,
             tz: 0,
