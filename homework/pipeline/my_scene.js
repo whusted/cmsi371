@@ -394,7 +394,7 @@
     verticesPasser(objectsToDraw);
 
     // Set up our one light source and color.  Note the uniform3fv function.
-    gl.uniform3fv(lightPosition, [30.0, 20.0, 90.0]);
+    gl.uniform4fv(lightPosition, [30.0, 20.0, 90.0, 1.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
     gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
@@ -416,7 +416,7 @@
         xLight = event.pageX > 612 ? -(event.pageX / 12) : event.pageX / 12;
         yLight = event.pageY > 416 ? -(event.pageY / 12) : event.pageY / 12;
         
-        gl.uniform3fv(lightPosition, [xLight, yLight, 90.0]);
+        gl.uniform4fv(lightPosition, [xLight, yLight, 90.0, 1.0]);
         gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
         drawScene();
     });
