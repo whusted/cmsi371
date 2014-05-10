@@ -68,6 +68,8 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Build the objects to display.
+    // JD: LOL nice.  Creative and clever :)  The only issue I see here is that you
+    //     don't get to exercise your instance matrix code much; just scaling.
     objectsToDraw = [
         {
             color: { r: Math.random(), g: Math.random(), b: Math.random() },
@@ -80,6 +82,11 @@
             sy: 1,
             sz: 1,
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(10, 32, 32)),
+            // JD: Of note here: you create a *bunch* of spheres---but really you only need
+            //     to create one.  Do you see how that would be done.  Considering how
+            //     involved the sphere and its normals can be, I think adapting this to
+            //     derive everything from a single sphere mesh will speed up the initial
+            //     display of your scene quite noticeably.
             mode: gl.TRIANGLES,
             normals: Shapes.toVertexNormalArray(Shapes.sphere(10, 32, 32)),
             subobjects: [
@@ -313,7 +320,8 @@
             // Build our instance transformation matrix.
             var instanceMatrix = inheritedInstance || new Matrix4x4();
 
-            // Translate, scale, and rotate
+            // Translate, scale, and rotate.
+            // JD: Yep, pretty much right for an instance matrix.
             instanceMatrix = instanceMatrix.multiply(
                 Matrix4x4.getTranslationMatrix(
                     objectsToDraw[i].tx || 0, objectsToDraw[i].ty || 0, objectsToDraw[i].tz || 0
