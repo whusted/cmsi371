@@ -169,7 +169,10 @@
                 }
             ]
         }
-
+        // JD: There is still a fly in your shape group ointment.
+        //     To see it, add more objects to your scene at the top
+        //     level, then watch the console (and the screen, for
+        //     that matter).
     ];
 
     var sphere = objectsToDraw[0];
