@@ -280,7 +280,8 @@
 
     // Initialize projection matrix
     gl.uniformMatrix4fv(projectionMatrix, 
-        gl.FALSE, 
+        gl.FALSE,
+        // JD: Uhhh...your frustum parameters are r, l, t, b, n f.
         new Float32Array(Matrix4x4.getFrustumMatrix(-2, 2, 2, -2, 20, 2000).toDirectConsumption())
     );
 
@@ -387,12 +388,17 @@
     drawScene();
 
     // prevent arrow keys from moving entire page
-    window.addEventListener("keydown", function(e) {
-        if([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    window.addEventListener("keydown", function (e) {
+        // JD: Hmmm, seems like you had plans for the other arrow keys...I wonder...
+        if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
             e.preventDefault();
         }
     }, false);
 
+    // JD: Nice, thinking out of the box here.  A little jumpy though---going negative
+    //     when you cross the threshold isn't complete because the mouse's origin is
+    //     in the upper left corner while the scene's origin is in the center.  Stare
+    //     at that a bit more :)
     $(canvas).mousemove(function (event) {
         var xLight,
             yLight;
@@ -406,7 +412,9 @@
         drawScene();
     });
 
-    $('body').keydown(function(event) {
+    // JD: Fun idea.  But is it really better to scale your scene, or adjust your
+    //     viewing volume and camera?
+    $('body').keydown(function (event) {
         var actions = {
             
             // Up arrow key
