@@ -13,7 +13,7 @@ $(function () {
         racers.drawWillysEyes();
     };
 
-    window['racers'].drawWillysHead = function(renderingContext) {
+    window['racers'].drawWillysHead = function (renderingContext) {
         var fleshR = 255 - Math.floor(racers.willy.bobLevel * 50),
             fleshG = 249 - Math.floor(racers.willy.bobLevel * 50),
             fleshB = 229 - Math.floor(racers.willy.bobLevel * 50);
@@ -30,7 +30,7 @@ $(function () {
         racers.renderingContext.restore();
     };
 
-    window['racers'].drawWillysSmile = function(renderingContext) {
+    window['racers'].drawWillysSmile = function (renderingContext) {
         racers.renderingContext.save();
         racers.renderingContext.translate(racers.willy.x, racers.willy.y);
         racers.renderingContext.scale(1.0 + racers.willy.bobLevel, 1.0 + racers.willy.bobLevel);
@@ -40,7 +40,7 @@ $(function () {
         racers.renderingContext.restore();
     };
 
-    window['racers'].drawWillysEyes = function(renderingContext) {
+    window['racers'].drawWillysEyes = function (renderingContext) {
         racers.renderingContext.save();
         racers.renderingContext.translate(racers.willy.x, racers.willy.y);
         racers.renderingContext.scale(1.0 + racers.willy.bobLevel, 1.0 + racers.willy.bobLevel);
